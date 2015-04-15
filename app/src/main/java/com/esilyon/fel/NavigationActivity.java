@@ -1,6 +1,8 @@
 package com.esilyon.fel;
 
 import android.app.Activity;
+import android.app.FragmentTransaction;
+import android.provider.SyncStateContract;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -51,12 +53,27 @@ public class NavigationActivity extends ActionBarActivity
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
+        Fragment fragment = null;
+        android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentManager.beginTransaction()
                 .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
                 .commit();
+
+        switch (position){
+            default:
+            case 0:
+                fragment = new EventFragment();
+                if (getSupportFragmentManager().findFragmentByTag("EVENT") == null){
+                    fragmentTransaction.replace(R.id.container, fragment, "EVENT").commit();
+                }
+                break;
+        }
+
     }
 
     public void onSectionAttached(int number) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        android.support.v4.app.FragmentTransaction ft = fragmentManager.beginTransaction();
         switch (number) {
             case 1:
                 mTitle = getString(R.string.title_section1);
