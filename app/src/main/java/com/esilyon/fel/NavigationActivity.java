@@ -70,10 +70,11 @@ public class NavigationActivity extends ActionBarActivity
             default:
             case 0:
                 fragment = new EventFragment();
-                if (getSupportFragmentManager().findFragmentByTag("EVENT") == null){
-                    fragmentTransaction.replace(R.id.container, fragment, "EVENT").commit();
-                }
+                fragmentTransaction.replace(R.id.container, fragment, "EVENT").commit();
                 break;
+            case 1:
+                fragment = new HousingFragment();
+                fragmentTransaction.replace(R.id.container, fragment, "HOUSING").commit();
         }
 
     }
@@ -122,11 +123,6 @@ public class NavigationActivity extends ActionBarActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }

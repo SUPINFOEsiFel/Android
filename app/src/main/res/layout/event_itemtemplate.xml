@@ -20,8 +20,7 @@
                 android:layout_height="60dp"
                 android:layout_marginRight="10dp"
                 android:adjustViewBounds="true"
-                android:scaleType="centerInside"
-                android:src="@android:color/holo_red_dark"/>
+                android:scaleType="fitCenter"/>
             <LinearLayout
                 android:id="@+id/EventInfos"
                 android:layout_gravity="center"

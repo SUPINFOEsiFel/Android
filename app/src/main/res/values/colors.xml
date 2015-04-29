@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-
+    <color name="semiTransparent">#99000000</color>
     <color name="lightgray">#d9d9d9</color>
     <color name="blueFEL">#302B6D</color>
     <color name="redFEL">#EE332B</color>

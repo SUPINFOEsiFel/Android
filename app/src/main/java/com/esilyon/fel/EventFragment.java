@@ -40,7 +40,7 @@ public class EventFragment extends Fragment{
         Event event3 = new Event();
         event3.set_eventDesc("Lan de League of Legend à SUPINFO Lyon!");
         event3.set_eventName("Lan de League of Legend");
-        event3.set_eventImage("https://signup.leagueoflegends.com/theme/signup_theme/img/signup_logo2_clean.png");
+        event3.set_eventImage("http://fontmeme.com/images/League-of-Legends-Game-Logo.jpg");
         event3.set_eventStartDate("30/05/2015");
 
         events.add(event1);
