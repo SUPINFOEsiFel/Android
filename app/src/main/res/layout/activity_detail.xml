@@ -1,0 +1,98 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+     tools:context=".detailActivity">
+
+    <TextView
+        android:id="@+id/eventTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Title of the dead"
+        android:gravity="center_horizontal"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:paddingLeft="10dp"/>
+
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_below="@id/eventTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:src="@drawable/android"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:background="@android:color/black"
+            android:layout_margin="10dp"/>
+        <LinearLayout
+            android:background="@drawable/border_detail"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:orientation="vertical"
+            android:padding="2dp"
+            android:layout_margin="10dp"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/evenDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Date : 03/03/2060"
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/line"
+        android:layout_below="@id/header"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        android:layout_marginTop="2dp"/>
+
+    <LinearLayout
+        android:layout_below="@id/line"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="50dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="d"
+            android:padding="5dp"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="5dp"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        >
+
+        <Button
+            android:id="@+id/participeBtn"
+            android:text="Je participe"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            />
+        <Button
+            android:id="@+id/addTo"
+            android:text="J'ajoute à mon agenda"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_toRightOf="@+id/participeBtn"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>
