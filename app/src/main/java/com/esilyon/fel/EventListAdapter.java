@@ -1,6 +1,7 @@
 package com.esilyon.fel;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.DataSetObserver;
 import android.media.Image;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
@@ -37,15 +39,16 @@ public class EventListAdapter extends ArrayAdapter<Event> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Event currentEvent = values.get(position);
+        final Event currentEvent = values.get(position);
         DisplayImageOptions options = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).displayer(new RoundedBitmapDisplayer(20)).build();
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View rowView = inflater.inflate(R.layout.event_itemtemplate, parent, false);
+        final View rowView = inflater.inflate(R.layout.event_itemtemplate, parent, false);
 
         ImageView eventImage = (ImageView) rowView.findViewById(R.id.EventImage);
         TextView eventName = (TextView) rowView.findViewById(R.id.EventName);
         TextView eventDate = (TextView) rowView.findViewById(R.id.EventDate);
         TextView eventDesc = (TextView) rowView.findViewById(R.id.EventDesc);
+        LinearLayout event = (LinearLayout) rowView.findViewById(R.id.Event);
 
         if (currentEvent.get_eventImage() != null && !currentEvent.get_eventImage().isEmpty()){
             ImageLoader.getInstance().displayImage(currentEvent.get_eventImage(),eventImage, options);
@@ -57,6 +60,15 @@ public class EventListAdapter extends ArrayAdapter<Event> {
         eventName.setText(currentEvent.get_eventName());
         eventDate.setText(currentEvent.get_eventStartDate());
         eventDesc.setText(currentEvent.get_eventDesc());
+
+        event.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), DetailActivity.class);
+                intent.putExtra("event", currentEvent);
+                getContext().startActivity(intent);
+            }
+        });
 
         return rowView;
     }

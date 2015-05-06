@@ -1,7 +1,9 @@
 package com.esilyon.fel.Entities;
 
 
-public class Event {
+import java.io.Serializable;
+
+public class Event implements Serializable {
 
     private String _eventImage;
     private String _eventName;

@@ -22,6 +22,9 @@
             android:name=".HousingActivity"
             android:label="@string/title_activity_housing" >
         </activity>
+        <activity
+            android:name=".DetailActivity">
+        </activity>
     </application>
 
 </manifest>

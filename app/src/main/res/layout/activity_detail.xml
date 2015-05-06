@@ -3,20 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
      tools:context=".detailActivity">
-
-    <TextView
-        android:id="@+id/eventTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Title of the dead"
-        android:gravity="center_horizontal"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:paddingLeft="10dp"/>
-
     <LinearLayout
         android:id="@+id/header"
-        android:layout_below="@id/eventTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -24,9 +12,10 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:src="@drawable/event_icon"
             android:layout_width="120dp"
             android:layout_height="120dp"
+            android:background="@drawable/border"
+            android:padding="1dp"
             android:layout_margin="10dp"/>
         <LinearLayout
             android:background="@drawable/border"
@@ -41,7 +30,6 @@
                 android:id="@+id/evenDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Date : 03/03/2060"
                 android:paddingLeft="10dp"
                 android:paddingTop="5dp"/>
 
@@ -61,24 +49,34 @@
         android:layout_below="@id/line"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="50dp">
-
-        <TextView
+        android:layout_marginBottom="60dp">
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text=""
-            android:padding="5dp"/>
+            android:padding="10dp">
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/border_detail">
+                <TextView
+                    android:id="@+id/eventDetailDesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/black"
+                    android:padding="10dp"/>
 
+            </ScrollView>
+        </RelativeLayout>
     </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:layout_margin="5dp"
         android:layout_alignParentBottom="true"
         android:gravity="center"
+        android:paddingBottom="10dp"
         >
-
         <Button
             android:id="@+id/participeBtn"
             android:text="Je participe"

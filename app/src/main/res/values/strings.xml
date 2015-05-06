@@ -19,14 +19,19 @@
 
     <!-- FIND A HOUSING -->
     <string name="Housing_Description">Ici vous pouvez trouver les résidences proposées en ce moment par studélite.</string>
+    <!--RESIDENCE 1-->
     <string name="Studélite_Housing1">Résidence étudiante Saint-Louis</string>
     <string name="Studélite_Housing1_link">http://www.studelites.com/fr/lyon/residence-etudiante-saint-louis-lyon-7.html</string>
+    <!--RESIDENCE 2-->
     <string name="Studélite_Housing2">Résidence étudiante Bron Lumière</string>
     <string name="Studélite_Housing2_link">http://www.studelites.com/fr/lyon/residence-etudiante-saint-louis-lyon-7.html</string>
+    <!--RESIDENCE 3-->
     <string name="Studélite_Housing3">Résidence étudiante Dali II</string>
     <string name="Studélite_Housing3_link">http://www.studelites.com/fr/lyon/residence-etudiante-dali-ii-lyon-3.html</string>
+    <!--RESIDENCE 4-->
     <string name="Studélite_Housing4">Résidence étudiante Dufy4</string>
     <string name="Studélite_Housing4_link">http://www.studelites.com/fr/lyon/residence-etudiante-dufy-villeurbanne.html</string>
+
     <string name="title_activity_housing">HousingActivity</string>
 
     <string name="Loader_Wait">Veuillez patienter...</string>

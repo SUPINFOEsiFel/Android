@@ -25,7 +25,7 @@ public class EventFragment extends Fragment{
         View v = inflater.inflate(R.layout.event_layout, container, false);
         //Données de test
         List<Event> events = new ArrayList<Event>();
-        Event event1 = new Event();
+        /*Event event1 = new Event();
         event1.set_eventDesc("Event 1");
         event1.set_eventName("New Event1!!");
         event1.set_eventImage("http://bloggingtips.moneyreigninc.netdna-cdn.com/wp-content/uploads/2014/12/Event-Blogging-Strategies.jpg");
@@ -47,7 +47,7 @@ public class EventFragment extends Fragment{
         events.add(event2);
         events.add(event3);
         //
-
+        */
         eventList = (ListView) v.findViewById(R.id.EventList);
 
         EventListAdapter adapter = new EventListAdapter(getActivity(), events);
