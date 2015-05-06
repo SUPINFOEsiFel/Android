@@ -24,13 +24,12 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:src="@drawable/android"
+            android:src="@drawable/event_icon"
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:background="@android:color/black"
             android:layout_margin="10dp"/>
         <LinearLayout
-            android:background="@drawable/border_detail"
+            android:background="@drawable/border"
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:orientation="vertical"
@@ -67,7 +66,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="d"
+            android:text=""
             android:padding="5dp"/>
 
     </LinearLayout>
