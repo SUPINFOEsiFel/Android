@@ -88,7 +88,8 @@
             android:text="J'ajoute à mon agenda"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:layout_toRightOf="@+id/participeBtn"/>
+            android:layout_toRightOf="@+id/participeBtn"
+            android:onClick="onClickSaveInCalendar" />
 
     </RelativeLayout>
 

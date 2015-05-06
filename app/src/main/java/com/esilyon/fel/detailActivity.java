@@ -3,10 +3,12 @@ package com.esilyon.fel;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.drawable.ColorDrawable;
+import android.provider.CalendarContract;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,6 +18,11 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
 import org.w3c.dom.Text;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 
 public class DetailActivity extends ActionBarActivity {
@@ -61,4 +68,45 @@ public class DetailActivity extends ActionBarActivity {
         actionBar.setBackgroundDrawable(new ColorDrawable(this.getResources().getColor(R.color.redFEL)));
         return true;
     }
+
+
+    public void onClickSaveInCalendar(View view)
+    {
+        // parsing des date en strung vers Date
+        Date startDate = parsingToDate(currentEvent.get_eventStartDate());
+        Date endDate = parsingToDate(currentEvent.get_eventEndDate());
+
+        if (endDate == null)
+            endDate = startDate;
+
+        Calendar beginTime = Calendar.getInstance();
+        beginTime.setTime(startDate);
+        Calendar endTime = Calendar.getInstance();
+        endTime.setTime(endDate);
+
+        Intent intent = new Intent(Intent.ACTION_INSERT)
+                .setData(CalendarContract.Events.CONTENT_URI)
+                .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME,beginTime.getTimeInMillis())
+                .putExtra(CalendarContract.EXTRA_EVENT_END_TIME,endTime.getTimeInMillis())
+                .putExtra(CalendarContract.Events.TITLE, currentEvent.get_eventName())
+                .putExtra(CalendarContract.Events.DESCRIPTION, currentEvent.get_eventDesc());
+        startActivity(intent);
+
+    }
+
+    private Date parsingToDate(String s)
+    {
+        if(s == null) return null;
+        else {
+            SimpleDateFormat sdf = new SimpleDateFormat(getResources().getString(R.string.date_format));
+            Date d = new Date();
+            try {
+                d = sdf.parse(s);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            return d;
+        }
+    }
+
 }

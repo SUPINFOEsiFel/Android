@@ -36,4 +36,7 @@
 
     <string name="Loader_Wait">Veuillez patienter...</string>
 
+    <!--FORMAT DATE/HEURE-->
+    <string name="date_format">dd/MM/yyyy</string>
+
 </resources>
