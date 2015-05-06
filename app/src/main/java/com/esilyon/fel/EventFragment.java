@@ -1,30 +1,59 @@
 package com.esilyon.fel;
 
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.esilyon.fel.Entities.Event;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class EventFragment extends Fragment{
     private ListView eventList;
+    private SwipeRefreshLayout refreshLayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.event_layout, container, false);
         //Données de test
-        List<Event> events = new ArrayList<Event>();
+        eventList = (ListView) v.findViewById(R.id.EventList);
+        refreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.activity_main_swipe_refresh_layout);
+        AsyncTask<Void,Void,List<Event>> eventListRequest = new RequestEvents();
+        refreshLayout.setColorSchemeResources(R.color.redFEL, R.color.blueFEL);
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshLayout.setRefreshing(true);
+                AsyncTask<Void,Void,List<Event>> refreshEvent = new RequestEvents();
+                refreshEvent.execute();
+            }
+        });
+        refreshLayout.setRefreshing(true);
+        eventListRequest.execute();
         /*Event event1 = new Event();
         event1.set_eventDesc("Event 1");
         event1.set_eventName("New Event1!!");
@@ -48,12 +77,6 @@ public class EventFragment extends Fragment{
         events.add(event3);
         //
         */
-        eventList = (ListView) v.findViewById(R.id.EventList);
-
-        EventListAdapter adapter = new EventListAdapter(getActivity(), events);
-        if (eventList != null){
-            eventList.setAdapter(adapter);
-        }
         return v;
     }
 
@@ -61,5 +84,67 @@ public class EventFragment extends Fragment{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
+
+
+    class RequestEvents extends AsyncTask<Void,Void,List<Event>>{
+
+        protected List<Event> doInBackground(Void... params) {
+            HttpResponse response;
+            String str="";
+            JSONObject jobj;
+            JSONArray jArray = new JSONArray();
+            HttpClient client = new DefaultHttpClient();
+            HttpGet connection = new HttpGet("http://10.31.16.228:3000/api/events");
+            try {
+                response = client.execute(connection);
+                str = EntityUtils.toString(response.getEntity(), "UTF-8");
+            } catch (ClientProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            try{
+                jobj = new JSONObject(str);
+                String status = jobj.getString("status");
+                if (!status.equals("error")){
+                    jArray = jobj.getJSONArray("events");
+                }
+            }catch ( JSONException e) {
+                e.printStackTrace();
+            }
+
+            List<Event> itemlist = new ArrayList<Event>();
+            for (int i=0; i < jArray.length(); ++i){
+                try {
+                    JSONObject row = jArray.getJSONObject(i);
+                    Event event = new Event();
+                    event.set_eventName(row.getString("name"));
+                    if (row.getString("_id").length() > 0)
+                    {
+                        event.set_eventImage("http://10.31.16.228:3000/upload/"+ row.getString("_id"));
+                    }
+                    event.set_eventStartDate(row.getString("begin"));
+                    event.set_eventEndDate(row.getString("end"));
+                    event.set_eventDesc(row.getString("comment"));
+                    itemlist.add(i,event);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            return itemlist;
+        }
+
+        @Override
+        protected void onPostExecute(List<Event> result) {
+            EventListAdapter adapter = new EventListAdapter(getActivity(), result);
+            if (eventList != null){
+                eventList.setAdapter(adapter);
+                refreshLayout.setRefreshing(false);
+            }
+
+        }
+    };
+
 
 }

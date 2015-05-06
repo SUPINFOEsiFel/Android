@@ -20,6 +20,7 @@
                 android:id="@+id/EventImage"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
+                android:src="@drawable/event_icon"
                 android:layout_marginRight="10dp"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"/>

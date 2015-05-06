@@ -19,6 +19,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
 /**
@@ -50,16 +51,20 @@ public class EventListAdapter extends ArrayAdapter<Event> {
         TextView eventDesc = (TextView) rowView.findViewById(R.id.EventDesc);
         LinearLayout event = (LinearLayout) rowView.findViewById(R.id.Event);
 
-        if (currentEvent.get_eventImage() != null && !currentEvent.get_eventImage().isEmpty()){
-            ImageLoader.getInstance().displayImage(currentEvent.get_eventImage(),eventImage, options);
+        if (currentEvent.get_eventImage() != null && currentEvent.get_eventImage().length() > 0) {
+            ImageLoader.getInstance().displayImage(currentEvent.get_eventImage(), eventImage, options);
         }
         else {
             eventImage.setImageResource(R.drawable.event_icon);
         }
-
+        String description = currentEvent.get_eventDesc();
+        if ( description.length() > 200){
+            description = description.substring(0, 200);
+            description += " ... ";
+        }
         eventName.setText(currentEvent.get_eventName());
         eventDate.setText(currentEvent.get_eventStartDate());
-        eventDesc.setText(currentEvent.get_eventDesc());
+        eventDesc.setText(description);
 
         event.setOnClickListener(new View.OnClickListener() {
             @Override
