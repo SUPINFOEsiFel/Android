@@ -19,12 +19,8 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
-import java.io.FileNotFoundException;
 import java.util.List;
 
-/**
- * Created by aiems_000 on 22/04/2015.
- */
 public class EventListAdapter extends ArrayAdapter<Event> {
     private final Context context;
     private final List<Event> values;
