@@ -10,6 +10,8 @@ public class Event implements Serializable {
     private String _eventStartDate;
     private String _eventEndDate;
     private String _eventDesc;
+    private String _eventPrice;
+    private String _eventLocation;
 
 
     //GETTERS
@@ -33,6 +35,12 @@ public class Event implements Serializable {
         return _eventDesc;
     }
 
+    public String get_eventPrice(){
+        return _eventPrice;
+    }
+
+    public String get_eventLocation(){ return _eventLocation; }
+
     //SETTERS
     public void set_eventImage(String url){
         _eventImage = url;
@@ -52,5 +60,19 @@ public class Event implements Serializable {
 
     public void set_eventDesc(String description){
         _eventDesc = description;
+    }
+
+    public void set_eventPrice(String price){
+        _eventPrice = price;
+    }
+
+    public void set_eventLocation(String location){
+        _eventLocation = location;
+    }
+
+    @Override
+    public String toString() {
+        return "Event [eventImage=" + _eventImage + ", name=" + _eventName + ", description="
+                + _eventDesc + ", price=" + _eventPrice + ", start=" + _eventStartDate + ", end=" + _eventEndDate + ", location=" + _eventLocation +"]";
     }
 }

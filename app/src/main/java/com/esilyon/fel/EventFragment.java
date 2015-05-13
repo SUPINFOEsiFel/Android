@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.esilyon.fel.Entities.Event;
 
@@ -27,6 +28,7 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -35,10 +37,12 @@ import java.util.List;
 public class EventFragment extends Fragment{
     private ListView eventList;
     private SwipeRefreshLayout refreshLayout;
+    private View view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.event_layout, container, false);
+        view = v;
         //Données de test
         eventList = (ListView) v.findViewById(R.id.EventList);
         refreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.activity_main_swipe_refresh_layout);
@@ -115,23 +119,32 @@ public class EventFragment extends Fragment{
             }
 
             List<Event> itemlist = new ArrayList<Event>();
-            for (int i=0; i < jArray.length(); ++i){
-                try {
-                    JSONObject row = jArray.getJSONObject(i);
-                    Event event = new Event();
-                    event.set_eventName(row.getString("name"));
-                    if (row.getString("_id").length() > 0)
-                    {
-                        event.set_eventImage("http://10.31.16.228:3000/upload/"+ row.getString("_id"));
+            if (jArray.length() > 0){
+                for (int i=0; i < jArray.length(); ++i){
+                    try {
+                        JSONObject row = jArray.getJSONObject(i);
+                        Event event = new Event();
+                        event.set_eventName(row.getString("name"));
+                        if (row.getString("_id").length() > 0)
+                        {
+                            event.set_eventImage("http://10.31.16.228:3000/upload/"+ row.getString("_id"));
+                        }
+                        event.set_eventStartDate(row.getString("begin"));
+                        event.set_eventEndDate(row.getString("end"));
+                        event.set_eventDesc(row.getString("comment"));
+                        event.set_eventLocation(row.getString("address") + ", " + row.get("zipCode"));
+                        event.set_eventPrice(row.getString("price"));
+                        itemlist.add(i,event);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                    event.set_eventStartDate(row.getString("begin"));
-                    event.set_eventEndDate(row.getString("end"));
-                    event.set_eventDesc(row.getString("comment"));
-                    itemlist.add(i,event);
-                } catch (JSONException e) {
-                    e.printStackTrace();
                 }
             }
+            else {
+                TextView noEvents = (TextView) view.findViewById(R.id.noEvents);
+                noEvents.setVisibility(View.VISIBLE);
+            }
+
             return itemlist;
         }
 

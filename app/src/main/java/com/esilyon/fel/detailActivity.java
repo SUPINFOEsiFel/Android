@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,8 +20,10 @@ import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
 import org.w3c.dom.Text;
 
+import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -28,10 +31,12 @@ import java.util.Date;
 public class DetailActivity extends ActionBarActivity {
 
     private Event currentEvent;
+    public boolean alreadyParticipating = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        final SharedPreferences preferences = new SharedPreferences();
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_detail);
         Intent intent = getIntent();
@@ -39,7 +44,10 @@ public class DetailActivity extends ActionBarActivity {
         setTitle(currentEvent.get_eventName());
         DisplayImageOptions options = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).build();
         ImageView image = (ImageView) findViewById(R.id.imageView);
-        TextView eventDate = (TextView) findViewById(R.id.evenDate);
+        TextView eventDateStart = (TextView) findViewById(R.id.evenDateStart);
+        TextView eventDateEnd = (TextView) findViewById(R.id.evenDateEnd);
+        TextView eventLocation = (TextView) findViewById(R.id.location);
+        TextView eventPrice = (TextView) findViewById(R.id.price);
         TextView eventDetailDesc = (TextView) findViewById(R.id.eventDetailDesc);
 
         if(currentEvent.get_eventImage() != null){
@@ -48,15 +56,51 @@ public class DetailActivity extends ActionBarActivity {
         else{
             image.setImageResource(R.drawable.event_icon);
         }
-        String date = currentEvent.get_eventStartDate();
+
+        eventDateStart.setText(getString(R.string.startDate) + " " + currentEvent.get_eventStartDate());
         if (currentEvent.get_eventEndDate() != null)
         {
-            date += " - " + currentEvent.get_eventEndDate();
+            eventDateEnd.setVisibility(View.VISIBLE);
+            eventDateEnd.setText(getString(R.string.endDate) + " " + currentEvent.get_eventEndDate());
+        }
+        if (currentEvent.get_eventPrice().length() < 1){
+            eventPrice.setText(getString(R.string.free));
+        }
+        else {
+            eventPrice.setText(getString(R.string.price) + " " + currentEvent.get_eventPrice() + "€");
         }
 
-        eventDate.setText(date);
+        eventLocation.setText(getString(R.string.location) + " " + currentEvent.get_eventLocation());
 
+        final Button participation = (Button) findViewById(R.id.participeBtn);
         eventDetailDesc.setText(currentEvent.get_eventDesc());
+        final ArrayList<Event> myEvents = preferences.getEvents(getApplicationContext());
+        if (myEvents != null){
+            for(int i=0; i < myEvents.size(); ++i){
+                if (myEvents.get(i).toString().equals(currentEvent.toString())){
+                    participation.setText(getString(R.string.removeEvent));
+                    alreadyParticipating = true;
+                }
+            }
+        }
+
+        participation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (alreadyParticipating){
+                    preferences.removeEvents(getApplicationContext(), currentEvent);
+                    alreadyParticipating = false;
+                    participation.setText(getString(R.string.addEvent));
+                }
+                else
+                {
+                    preferences.addEvents(getApplicationContext(), currentEvent);
+                    participation.setText(getString(R.string.removeEvent));
+                    alreadyParticipating = true;
+                }
+
+            }
+        });
     }
 
 
