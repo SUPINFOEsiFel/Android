@@ -38,5 +38,10 @@
 
     <!--FORMAT DATE/HEURE-->
     <string name="date_format">dd/MM/yyyy</string>
+    <string name="title_activity_even_creator">Créer un événement</string>
+
+    <string name="hello_world">Hello world!</string>
+
+    <string name="create_event_text">Créer</string>
 
 </resources>

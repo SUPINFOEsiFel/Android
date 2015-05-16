@@ -3,6 +3,8 @@
     package="com.esilyon.fel" >
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -22,8 +24,12 @@
             android:name=".HousingActivity"
             android:label="@string/title_activity_housing" >
         </activity>
+        <activity android:name=".DetailActivity" >
+        </activity>
         <activity
-            android:name=".DetailActivity">
+            android:name=".EventCreator"
+            android:label="@string/title_activity_even_creator"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 

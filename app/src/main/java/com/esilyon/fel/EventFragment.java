@@ -1,5 +1,6 @@
 package com.esilyon.fel;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -11,9 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.esilyon.fel.Entities.Event;
 
@@ -35,11 +38,22 @@ import java.util.List;
 public class EventFragment extends Fragment{
     private ListView eventList;
     private SwipeRefreshLayout refreshLayout;
+    private ImageButton addButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.event_layout, container, false);
         //Données de test
+
+        addButton = (ImageButton)v.findViewById(R.id.addEventButton);
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity().getApplicationContext(),EventCreator.class);
+                startActivity(intent);
+            }
+        });
+
         eventList = (ListView) v.findViewById(R.id.EventList);
         refreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.activity_main_swipe_refresh_layout);
         AsyncTask<Void,Void,List<Event>> eventListRequest = new RequestEvents();
