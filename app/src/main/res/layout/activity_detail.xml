@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-     tools:context=".detailActivity">
+    tools:context=".detailActivity"
+    android:background="@color/blueFEL">
     <LinearLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
@@ -30,24 +31,33 @@
             <TextView
                 android:id="@+id/location"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:paddingLeft="10dp"
-                android:paddingTop="5dp"/>
+                android:layout_height="wrap_content"
+                android:textSize="12dp"
+                android:textColor="@android:color/black"
+                android:padding="5dp"/>
             <TextView
-                android:id="@+id/evenDate"
+                android:id="@+id/evenDateStart"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:paddingLeft="10dp"
-                android:paddingTop="5dp"/>
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textSize="12dp"
+                android:padding="5dp"/>
+            <TextView
+                android:id="@+id/evenDateEnd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:padding="5dp"
+                android:textSize="12dp"
+                android:visibility="gone"/>
             <TextView
                 android:id="@+id/price"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:paddingLeft="10dp"
-                android:paddingTop="5dp"/>
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:padding="5dp"
+                android:textSize="12dp"
+                android:gravity="end"/>
 
         </LinearLayout>
 
@@ -65,7 +75,7 @@
         android:layout_below="@id/line"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="60dp">
+        android:layout_marginBottom="70dp">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -73,7 +83,7 @@
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/border_detail">
+                android:background="@drawable/border">
                 <TextView
                     android:id="@+id/eventDetailDesc"
                     android:layout_width="match_parent"
@@ -87,7 +97,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="70dp"
         android:layout_margin="5dp"
         android:layout_alignParentBottom="true"
         android:gravity="center"
@@ -95,15 +105,15 @@
         >
         <Button
             android:id="@+id/participeBtn"
-            android:text="Je participe"
+            android:text="@string/addEvent"
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             />
         <Button
             android:id="@+id/addTo"
-            android:text="J'ajoute à mon agenda"
+            android:text="@string/addToScheduler"
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:layout_toRightOf="@+id/participeBtn"
             android:onClick="onClickSaveInCalendar" />
 

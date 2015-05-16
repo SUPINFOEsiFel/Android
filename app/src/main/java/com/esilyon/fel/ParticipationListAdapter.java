@@ -1,5 +1,6 @@
 package com.esilyon.fel;
 
+
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -18,11 +19,11 @@ import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
 import java.util.List;
 
-public class EventListAdapter extends ArrayAdapter<Event> {
+public class ParticipationListAdapter extends ArrayAdapter<Event> {
     private final Context context;
     private final List<Event> values;
 
-    public EventListAdapter(Context context, List<Event> values){
+    public ParticipationListAdapter(Context context, List<Event> values){
         super(context, R.layout.event_itemtemplate, values);
         this.context = context;
         this.values = values;
@@ -42,7 +43,11 @@ public class EventListAdapter extends ArrayAdapter<Event> {
         TextView eventName = (TextView) rowView.findViewById(R.id.EventName);
         TextView eventDate = (TextView) rowView.findViewById(R.id.EventDate);
         TextView eventDesc = (TextView) rowView.findViewById(R.id.EventDesc);
+        eventDesc.setVisibility(View.GONE);
         LinearLayout event = (LinearLayout) rowView.findViewById(R.id.Event);
+        LinearLayout Layout = (LinearLayout) rowView.findViewById(R.id.overallLayout);
+
+        Layout.setPadding(0,0,0,1);
 
         if (currentEvent.get_eventImage() != null && currentEvent.get_eventImage().length() > 0) {
             ImageLoader.getInstance().displayImage(currentEvent.get_eventImage(), eventImage, options);
@@ -50,14 +55,8 @@ public class EventListAdapter extends ArrayAdapter<Event> {
         else {
             eventImage.setImageResource(R.drawable.event_icon);
         }
-        String description = currentEvent.get_eventDesc();
-        if ( description.length() > 200){
-            description = description.substring(0, 200);
-            description += " ... ";
-        }
         eventName.setText(currentEvent.get_eventName());
         eventDate.setText(currentEvent.get_eventStartDate());
-        eventDesc.setText(description);
 
         event.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,4 +69,6 @@ public class EventListAdapter extends ArrayAdapter<Event> {
 
         return rowView;
     }
+
+
 }

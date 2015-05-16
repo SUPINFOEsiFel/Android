@@ -75,6 +75,13 @@ public class NavigationActivity extends ActionBarActivity
             case 1:
                 fragment = new HousingFragment();
                 fragmentTransaction.replace(R.id.container, fragment, "HOUSING").commit();
+                break;
+            case 2:
+                fragment = new MyParticipationFragment();
+                fragmentTransaction.replace(R.id.container, fragment, "PARTICIPATING").commit();
+                break;
+            case 3:
+                break;
         }
 
     }
@@ -91,6 +98,9 @@ public class NavigationActivity extends ActionBarActivity
                 break;
             case 3:
                 mTitle = getString(R.string.title_section3);
+                break;
+            case 4:
+                mTitle = getString(R.string.title_section4);
                 break;
         }
     }
