@@ -20,9 +20,10 @@ public class MyParticipationFragment extends Fragment {
 
     private ListView eventList;
     private SwipeRefreshLayout refreshLayout;
+    private View v;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final View v = inflater.inflate(R.layout.event_layout, container, false);
+        v = inflater.inflate(R.layout.event_layout, container, false);
         eventList = (ListView) v.findViewById(R.id.EventList);
         refreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.activity_main_swipe_refresh_layout);
         refreshLayout.setColorSchemeResources(R.color.redFEL, R.color.blueFEL);
@@ -35,9 +36,14 @@ public class MyParticipationFragment extends Fragment {
         });
         init(v);
 
-
-
         return v;
+    }
+
+    @Override
+    public void onResume(){
+        refreshLayout.setRefreshing(true);
+        init(v);
+        super.onResume();
     }
 
     @Override
@@ -52,6 +58,7 @@ public class MyParticipationFragment extends Fragment {
             if (myEvents.size() < 1){
                 TextView noEvents = (TextView) v.findViewById(R.id.noEvents);
                 noEvents.setVisibility(View.VISIBLE);
+                eventList.setVisibility(View.GONE);
             }
             else {
                 ParticipationListAdapter adapter = new ParticipationListAdapter(getActivity(), myEvents);
@@ -63,5 +70,6 @@ public class MyParticipationFragment extends Fragment {
             TextView noEvents = (TextView) v.findViewById(R.id.noEvents);
             noEvents.setVisibility(View.VISIBLE);
         }
+        refreshLayout.setRefreshing(false);
     }
 }
