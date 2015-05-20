@@ -3,6 +3,7 @@ package com.esilyon.fel;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.provider.CalendarContract;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -44,6 +45,7 @@ public class DetailActivity extends ActionBarActivity {
         setTitle(currentEvent.get_eventName());
         DisplayImageOptions options = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).build();
         ImageView image = (ImageView) findViewById(R.id.imageView);
+        image.setImageResource(R.drawable.event_icon);
         TextView eventDateStart = (TextView) findViewById(R.id.evenDateStart);
         TextView eventDateEnd = (TextView) findViewById(R.id.evenDateEnd);
         TextView eventLocation = (TextView) findViewById(R.id.location);
@@ -63,7 +65,7 @@ public class DetailActivity extends ActionBarActivity {
             eventDateEnd.setVisibility(View.VISIBLE);
             eventDateEnd.setText(getString(R.string.endDate) + " " + currentEvent.get_eventEndDate());
         }
-        if ( currentEvent.get_eventPrice().length() < 1){
+        if (currentEvent.get_eventPrice() != null && currentEvent.get_eventPrice().length() < 1){
             eventPrice.setText(getString(R.string.free));
         }
         else {
