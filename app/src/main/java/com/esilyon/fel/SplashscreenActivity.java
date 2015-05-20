@@ -25,6 +25,7 @@ public class SplashscreenActivity extends Activity {
             public void run() {
                 Intent intent = new Intent(getApplicationContext(), NavigationActivity.class);
                 startActivity(intent);
+                finish();
             }
         },2000);
     }

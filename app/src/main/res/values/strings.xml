@@ -43,12 +43,18 @@
     <!-- RESIDENCE 4 -->
     <string name="Studélite_Housing4">Résidence étudiante Dufy4</string>
     <string name="Studélite_Housing4_link">http://www.studelites.com/fr/lyon/residence-etudiante-dufy-villeurbanne.html</string>
+
     <string name="title_activity_housing">HousingActivity</string>
+
     <string name="Loader_Wait">Veuillez patienter...</string>
 
     <!-- FORMAT DATE/HEURE -->
     <string name="date_format">dd/MM/yyyy</string>
     <string name="title_activity_splashscreen">SplashscreenActivity</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_even_creator">Créer un événement</string>
+
+    
+    <string name="create_event_text">Créer</string>
 
 </resources>
