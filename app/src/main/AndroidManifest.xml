@@ -4,7 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -15,8 +15,7 @@
             android:name=".NavigationActivity"
             android:label="@string/app_name" >
         </activity>
-        <activity
-            android:name=".SplashscreenActivity">
+        <activity android:name=".SplashscreenActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,14 +24,17 @@
         </activity>
         <activity
             android:name=".HousingActivity"
-            android:label="@string/title_activity_housing" >
+            android:label="@string/title_activity_housing"
+            android:parentActivityName=".NavigationActivity">
         </activity>
-        <activity android:name=".DetailActivity" >
+        <activity android:name=".DetailActivity"
+            android:parentActivityName=".NavigationActivity">
         </activity>
         <activity
             android:name=".EventCreator"
             android:label="@string/title_activity_even_creator"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:parentActivityName=".NavigationActivity">
         </activity>
     </application>
 

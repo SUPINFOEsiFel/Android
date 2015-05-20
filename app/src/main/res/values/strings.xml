@@ -57,4 +57,15 @@
     
     <string name="create_event_text">Créer</string>
 
+    <!--Dialog popup edit info et edit desc-->
+    <string name="ok_Button">Ok</string>
+    <string name="cancel_Button">Annuler</string>
+    <string name="title_edit_info">Editer les informations</string>
+    <string name="date_debut_edit_info">Date/Heure de début</string>
+    <string name="date_fin_edit_info">Date/Heure de fin</string>
+    <string name="desc_edit_info">Description de l\'événement</string>
+    <string name="adresse_event_edit_info">Adresse</string>
+    <string name="money_event_edit_info">€</string>
+    <string name="prix_event_edit_info">Prix :</string>
+
 </resources>
