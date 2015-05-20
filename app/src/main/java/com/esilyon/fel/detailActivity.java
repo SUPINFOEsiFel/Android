@@ -63,7 +63,7 @@ public class DetailActivity extends ActionBarActivity {
             eventDateEnd.setVisibility(View.VISIBLE);
             eventDateEnd.setText(getString(R.string.endDate) + " " + currentEvent.get_eventEndDate());
         }
-        if (currentEvent.get_eventPrice().length() < 1){
+        if ( currentEvent.get_eventPrice().length() < 1){
             eventPrice.setText(getString(R.string.free));
         }
         else {
