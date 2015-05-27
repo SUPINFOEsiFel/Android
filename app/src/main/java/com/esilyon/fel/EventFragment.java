@@ -23,7 +23,11 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.conn.ConnectTimeoutException;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -93,19 +97,32 @@ public class EventFragment extends Fragment{
     class RequestEvents extends AsyncTask<Void,Void,List<Event>>{
 
         protected List<Event> doInBackground(Void... params) {
+            List<Event> itemlist = new ArrayList<Event>();
             HttpResponse response;
             String str="";
             JSONObject jobj;
             JSONArray jArray = new JSONArray();
             HttpClient client = new DefaultHttpClient();
+            HttpParams httpParameters = new BasicHttpParams();
             HttpGet connection = new HttpGet("http://10.31.16.228:3000/api/events");
+            int timeoutConnection = 15000;
+            int timeoutSocket = 15000;
+            HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
+            HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
             try {
                 response = client.execute(connection);
                 str = EntityUtils.toString(response.getEntity(), "UTF-8");
-            } catch (ClientProtocolException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        TextView noEvents = (TextView) view.findViewById(R.id.noEvents);
+                        noEvents.setText(getString(R.string.connectionError));
+                        noEvents.setVisibility(View.VISIBLE);
+                    }
+                });
+                return itemlist = null;
             }
 
             try{
@@ -118,7 +135,6 @@ public class EventFragment extends Fragment{
                 e.printStackTrace();
             }
 
-            List<Event> itemlist = new ArrayList<Event>();
             if (jArray.length() > 0){
                 for (int i=0; i < jArray.length(); ++i){
                     try {
@@ -139,23 +155,30 @@ public class EventFragment extends Fragment{
                         e.printStackTrace();
                     }
                 }
+                return itemlist;
             }
             else {
-                TextView noEvents = (TextView) view.findViewById(R.id.noEvents);
-                noEvents.setVisibility(View.VISIBLE);
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        TextView noEvents = (TextView) view.findViewById(R.id.noEvents);
+                        noEvents.setText(getString(R.string.noEvents));
+                        noEvents.setVisibility(View.VISIBLE);
+                    }
+                });
+                return itemlist = null;
             }
-
-            return itemlist;
         }
 
         @Override
         protected void onPostExecute(List<Event> result) {
-            EventListAdapter adapter = new EventListAdapter(getActivity(), result);
-            if (eventList != null){
-                eventList.setAdapter(adapter);
-                refreshLayout.setRefreshing(false);
+            if (result != null){
+                EventListAdapter adapter = new EventListAdapter(getActivity(), result);
+                if (eventList != null){
+                    eventList.setAdapter(adapter);
+                    refreshLayout.setRefreshing(false);
+                }
             }
-
         }
     };
 

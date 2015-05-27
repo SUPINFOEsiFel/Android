@@ -16,6 +16,9 @@
     <string name="location">Lieu: </string>
     <string name="free">gratuit</string>
     <string name="noEvents">Il n\'y a pas d\'évènements</string>
+    <string name="connectionError">Impossible de se connecter</string>
+    <string name="noParticipation">Vous ne participez à aucun évènement.</string>
+    <string name="connection">Connexion en cours...</string>
     <string name="removeEvent">Ne plus participer</string>
     <string name="addEvent">Je participe</string>
     <string name="addToScheduler">J\'ajoute à mon agenda</string>
@@ -28,6 +31,7 @@
     <string name="navigation_drawer_open">drawer open</string>
     <string name="navigation_drawer_close">drawer closed</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
     <!-- FIND A HOUSING -->
     <string name="Housing_Description">Ici vous pouvez trouver les résidences proposées en ce moment par studélite.</string>

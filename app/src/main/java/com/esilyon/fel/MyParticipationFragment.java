@@ -57,6 +57,7 @@ public class MyParticipationFragment extends Fragment {
         if (myEvents != null){
             if (myEvents.size() < 1){
                 TextView noEvents = (TextView) v.findViewById(R.id.noEvents);
+                noEvents.setText(getString(R.string.noParticipation));
                 noEvents.setVisibility(View.VISIBLE);
                 eventList.setVisibility(View.GONE);
             }
