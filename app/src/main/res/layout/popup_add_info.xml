@@ -1,0 +1,149 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/blueFEL">
+
+    <LinearLayout
+        android:id="@+id/layout_info_popup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="5dp">
+
+        <EditText
+            android:id="@+id/adresse_edit_info_popup"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:textColor="@android:color/white"
+            android:hint="@string/adresse_event_edit_info"
+            android:textColorHint="@android:color/darker_gray"
+            android:inputType="textPostalAddress"
+            android:theme="@style/Theme.App.Base"
+            android:maxLines="2"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/editInfo_datedebut"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:hint="@string/date_debut_edit_info"
+                android:textColorHint="@android:color/darker_gray"
+                android:theme="@style/Theme.App.Base"
+                android:textColor="@android:color/white"
+                android:focusable="false"
+                android:inputType="datetime"/>
+            <ImageButton
+                android:id="@+id/fromDatTimeButton"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_calendar"
+                android:scaleType="centerInside"
+                android:padding="4dp"
+                android:background="@null"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="2dp">
+            <EditText
+                android:id="@+id/editInfo_datefin"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:hint="@string/date_fin_edit_info"
+                android:textColorHint="@android:color/darker_gray"
+                android:theme="@style/Theme.App.Base"
+                android:textColor="@android:color/white"
+                android:focusable="false"
+                android:inputType="datetime"/>
+            <ImageButton
+                android:id="@+id/toDatTimeButton"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_calendar"
+                android:scaleType="centerInside"
+                android:padding="4dp"
+                android:background="@null"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="@string/prix_event_edit_info"
+                android:textColor="@android:color/white"
+                android:gravity="right|center_vertical"
+                android:textSize="20dp"/>
+            <EditText
+                android:id="@+id/prix_edit_info_popup"
+                android:layout_width="60dp"
+                android:layout_height="40dp"
+                android:textColor="@android:color/white"
+                android:hint="@string/money_event_edit_info"
+                android:textColorHint="@android:color/darker_gray"
+                android:inputType="number"
+                android:gravity="right"
+                android:textSize="20dp"
+                android:layout_gravity="right"/>
+        </LinearLayout>
+
+        </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:layout_below="@id/layout_info_popup"
+        android:background="@android:color/darker_gray">
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="fill_parent">
+            <Button
+                android:id="@+id/cancel_button_desc_popup"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/redFEL"
+                android:text="@string/cancel_Button"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/abc_text_size_title_material_toolbar"
+                android:textAllCaps="false"/>
+        </FrameLayout>
+
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="@color/blueFEL"/>
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="fill_parent">
+            <Button
+                android:id="@+id/ok_button_desc_popup"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/redFEL"
+                android:text="@string/ok_Button"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/abc_text_size_title_material_toolbar"
+                android:textAllCaps="false"/>
+        </FrameLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

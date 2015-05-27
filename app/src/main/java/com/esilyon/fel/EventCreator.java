@@ -1,5 +1,7 @@
 package com.esilyon.fel;
 
+import android.app.FragmentManager;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
@@ -14,18 +16,23 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
-import java.io.File;
+import com.esilyon.fel.Popup.popup_AddDesc;
+import com.esilyon.fel.Popup.popup_AddInfo;
 
 
 public class EventCreator extends ActionBarActivity {
 
     private static int RESULT_LOAD_IMAGE = 1;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_even_creator);
+
+        this.context = this.getBaseContext();
 
         Button saveButton = (Button)findViewById(R.id.participeBtn);
         saveButton.setVisibility(View.INVISIBLE);
@@ -40,6 +47,34 @@ public class EventCreator extends ActionBarActivity {
                 Intent i = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 i.putExtra(MediaStore.EXTRA_OUTPUT,true);
                 startActivityForResult(i, RESULT_LOAD_IMAGE);
+            }
+        });
+
+        ImageButton addInfoButton = (ImageButton)findViewById(R.id.addInfoButton);
+        addInfoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fm = getFragmentManager();
+                popup_AddInfo popup_addInfo = new popup_AddInfo();
+                popup_addInfo.setParent(context);
+                popup_addInfo.show(fm,"PopupInfo");
+            }
+        });
+
+        ImageButton addDescButton = (ImageButton)findViewById(R.id.addDescButton);
+        addDescButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView textView = (TextView)findViewById(R.id.eventDetailDesc);
+                popup_AddDesc popup_addDesc = new popup_AddDesc();
+                if (textView.getText().length()>0) {
+                    Bundle arg = new Bundle();
+                    arg.putString("desc", textView.getText().toString());
+                    popup_addDesc.setArguments(arg);
+                }
+
+                FragmentManager fm = getFragmentManager();
+                popup_addDesc.show(fm,"PopupDesc");
             }
         });
 
@@ -83,27 +118,9 @@ public class EventCreator extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_even_creator, menu);
+        getMenuInflater().inflate(R.menu.global, menu);
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setBackgroundDrawable(new ColorDrawable(this.getResources().getColor(R.color.redFEL)));
         return true;
     }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-
-
 }

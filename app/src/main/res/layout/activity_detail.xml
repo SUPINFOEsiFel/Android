@@ -95,28 +95,65 @@
         </RelativeLayout>
     </LinearLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_margin="5dp"
+        android:orientation="horizontal"
         android:layout_alignParentBottom="true"
         android:gravity="center"
         android:paddingBottom="10dp"
         >
-        <Button
-            android:id="@+id/participeBtn"
-            android:text="@string/addEvent"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            />
-        <Button
-            android:id="@+id/addTo"
-            android:text="@string/addToScheduler"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:layout_toRightOf="@+id/participeBtn"
-            android:onClick="onClickSaveInCalendar" />
+        <!--<Button-->
+            <!--android:id="@+id/participeBtn"-->
+            <!--android:text="@string/addEvent"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="60dp"-->
+            <!--/>-->
+        <!--<Button-->
+            <!--android:id="@+id/addTo"-->
+            <!--android:text="@string/addToScheduler"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="60dp"-->
+            <!--android:layout_toRightOf="@+id/participeBtn"-->
+            <!--android:onClick="onClickSaveInCalendar" />-->
 
-    </RelativeLayout>
+        <FrameLayout
+            android:id="@+id/framePart"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_margin="15dp"
+            android:background="@color/redFEL">
+            <Button
+                android:id="@+id/participeBtn"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:text="@string/addEvent"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="?android:attr/selectableItemBackground"
+                android:textColor="@android:color/white"/>
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_margin="15dp"
+            android:background="@color/redFEL"
+            android:layout_toRightOf="@id/framePart">
+            <Button
+                android:id="@+id/addTo"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:text="@string/addToScheduler"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="?android:attr/selectableItemBackground"
+                android:textColor="@android:color/white"
+
+                android:onClick="onClickSaveInCalendar" />
+        </FrameLayout>
+
+    </LinearLayout>
 
 </RelativeLayout>
