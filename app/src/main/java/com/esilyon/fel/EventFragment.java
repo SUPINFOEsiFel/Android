@@ -116,7 +116,7 @@ public class EventFragment extends Fragment{
             JSONArray jArray = new JSONArray();
             HttpClient client = new DefaultHttpClient();
             HttpParams httpParameters = new BasicHttpParams();
-            HttpGet connection = new HttpGet("http://10.31.16.228:3000/api/events");
+            HttpGet connection = new HttpGet("http://37.187.245.237/api/events");
             int timeoutConnection = 15000;
             int timeoutSocket = 15000;
             HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
@@ -155,7 +155,7 @@ public class EventFragment extends Fragment{
                         event.set_eventName(row.getString("name"));
                         if (row.getString("_id").length() > 0)
                         {
-                            event.set_eventImage("http://10.31.16.228:3000/upload/"+ row.getString("_id"));
+                            event.set_eventImage("http://37.187.245.237/upload/"+ row.getString("_id") + row.getString("imageExtension"));
                         }
                         event.set_eventStartDate(row.getString("begin"));
                         event.set_eventEndDate(row.getString("end"));
