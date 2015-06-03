@@ -125,13 +125,8 @@ public class EventFragment extends Fragment{
             HttpClient client = new DefaultHttpClient();
             HttpParams httpParameters = new BasicHttpParams();
             HttpGet connection = new HttpGet("http://37.187.245.237/api/events");
-<<<<<<< HEAD
             int timeoutConnection = 3000;
             int timeoutSocket = 3000;
-=======
-            int timeoutConnection = 15000;
-            int timeoutSocket = 15000;
->>>>>>> cb6b873a73157bd520a6a6fa98dacde501afa69b
             HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
             HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
             try {
@@ -169,11 +164,7 @@ public class EventFragment extends Fragment{
                         event.set_eventName(row.getString("name"));
                         if (row.getString("_id").length() > 0)
                         {
-<<<<<<< HEAD
-                            event.set_eventImage("http://37.187.245.237/upload/"+ row.getString("_id"));
-=======
                             event.set_eventImage("http://37.187.245.237/upload/"+ row.getString("_id") + row.getString("imageExtension"));
->>>>>>> cb6b873a73157bd520a6a6fa98dacde501afa69b
                         }
                         event.set_eventStartDate(row.getString("begin"));
                         event.set_eventEndDate(row.getString("end"));
