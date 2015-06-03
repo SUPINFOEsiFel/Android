@@ -47,6 +47,9 @@ public class EventFragment extends Fragment{
     private SwipeRefreshLayout refreshLayout;
     private View view;
     private ImageButton addButton;
+    public static boolean IsConnected = false;
+    public static String userID = "";
+    public static String token = "";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -61,7 +64,14 @@ public class EventFragment extends Fragment{
                 startActivity(intent);
             }
         });
-
+        if (IsConnected)
+        {
+            v.findViewById(R.id.addEventButton).setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            v.findViewById(R.id.addEventButton).setVisibility(View.GONE);
+        }
         eventList = (ListView) v.findViewById(R.id.EventList);
         refreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.activity_main_swipe_refresh_layout);
         AsyncTask<Void,Void,List<Event>> eventListRequest = new RequestEvents(getActivity());
@@ -76,29 +86,6 @@ public class EventFragment extends Fragment{
         });
         refreshLayout.setRefreshing(true);
         eventListRequest.execute();
-        /*Event event1 = new Event();
-        event1.set_eventDesc("Event 1");
-        event1.set_eventName("New Event1!!");
-        event1.set_eventImage("http://bloggingtips.moneyreigninc.netdna-cdn.com/wp-content/uploads/2014/12/Event-Blogging-Strategies.jpg");
-        event1.set_eventStartDate("22/04/2015");
-
-        Event event2 = new Event();
-        event2.set_eventDesc("Event 2");
-        event2.set_eventName("New Event2!!");
-        event2.set_eventImage("http://visionevents.co.uk/wp-content/uploads/2012/09/event-production-quirky1.jpg");
-        event2.set_eventStartDate("22/04/2015");
-
-        Event event3 = new Event();
-        event3.set_eventDesc("Lan de League of Legend à SUPINFO Lyon!");
-        event3.set_eventName("Lan de League of Legend");
-        event3.set_eventImage("http://fontmeme.com/images/League-of-Legends-Game-Logo.jpg");
-        event3.set_eventStartDate("30/05/2015");
-
-        events.add(event1);
-        events.add(event2);
-        events.add(event3);
-        //
-        */
         return v;
     }
 
@@ -172,11 +159,6 @@ public class EventFragment extends Fragment{
                         event.set_eventLocation(row.getString("address") + ", " + row.get("zipCode"));
                         event.set_eventPrice(row.getString("price"));
                         itemlist.add(i,event);
-//                        ((ProgressBar)act.findViewById(R.id.LoadingEvent)).setVisibility(View.GONE);
-//                        ProgressBar prgb = (ProgressBar)act.findViewById(R.id.LoadingEvent);
-//                        prgb.setVisibility(View.GONE);
-//                        TextView txtv = (TextView)act.findViewById(R.id.noEvents);
-//                        txtv.setVisibility(View.GONE);
                         act.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
