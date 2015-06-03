@@ -52,7 +52,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/layout_create_button"
         android:minWidth="100dp"
-        android:layout_margin="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="16dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:background="@color/redFEL">
@@ -62,6 +63,37 @@
             android:layout_width="match_parent"
             android:textColor="@android:color/white"
             android:layout_height="match_parent"
-            android:text="@string/create_event_text"/>
+            android:text="@string/create_event_text_button"/>
     </FrameLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/layout_loader_create_event"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/transparentBackgroundLoader"
+        android:visibility="gone">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_centerInParent="true"
+            android:background="@android:color/white"
+            android:elevation="5dp">
+            <ProgressBar
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:indeterminate="true"
+                />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingLeft="10dp"
+                android:textStyle="italic"
+                android:gravity="center_vertical"
+                android:text="@string/creation_event_loader"/>
+        </LinearLayout>
+    </RelativeLayout>
 </RelativeLayout>

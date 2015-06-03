@@ -1,5 +1,6 @@
 package com.esilyon.fel;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -16,6 +17,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.esilyon.fel.Entities.Event;
@@ -62,13 +64,13 @@ public class EventFragment extends Fragment{
 
         eventList = (ListView) v.findViewById(R.id.EventList);
         refreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.activity_main_swipe_refresh_layout);
-        AsyncTask<Void,Void,List<Event>> eventListRequest = new RequestEvents();
+        AsyncTask<Void,Void,List<Event>> eventListRequest = new RequestEvents(getActivity());
         refreshLayout.setColorSchemeResources(R.color.redFEL, R.color.blueFEL);
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 refreshLayout.setRefreshing(true);
-                AsyncTask<Void,Void,List<Event>> refreshEvent = new RequestEvents();
+                AsyncTask<Void,Void,List<Event>> refreshEvent = new RequestEvents(getActivity());
                 refreshEvent.execute();
             }
         });
@@ -108,6 +110,12 @@ public class EventFragment extends Fragment{
 
     class RequestEvents extends AsyncTask<Void,Void,List<Event>>{
 
+        public Activity act;
+
+        RequestEvents(Activity a) {
+            this.act = a;
+        }
+
         protected List<Event> doInBackground(Void... params) {
             List<Event> itemlist = new ArrayList<Event>();
             HttpResponse response;
@@ -116,9 +124,9 @@ public class EventFragment extends Fragment{
             JSONArray jArray = new JSONArray();
             HttpClient client = new DefaultHttpClient();
             HttpParams httpParameters = new BasicHttpParams();
-            HttpGet connection = new HttpGet("http://10.31.16.228:3000/api/events");
-            int timeoutConnection = 15000;
-            int timeoutSocket = 15000;
+            HttpGet connection = new HttpGet("http://37.187.245.237/api/events");
+            int timeoutConnection = 3000;
+            int timeoutSocket = 3000;
             HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
             HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
             try {
@@ -126,12 +134,13 @@ public class EventFragment extends Fragment{
                 str = EntityUtils.toString(response.getEntity(), "UTF-8");
             } catch (Exception e) {
                 e.printStackTrace();
-                getActivity().runOnUiThread(new Runnable() {
+                act.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        TextView noEvents = (TextView) view.findViewById(R.id.noEvents);
-                        noEvents.setText(getString(R.string.connectionError));
+                        TextView noEvents = (TextView) act.findViewById(R.id.noEvents);
+                        noEvents.setText(act.getResources().getString(R.string.connectionError));
                         noEvents.setVisibility(View.VISIBLE);
+                        ((ProgressBar)act.findViewById(R.id.LoadingEvent)).setVisibility(View.GONE);
                     }
                 });
                 return itemlist = null;
@@ -155,7 +164,7 @@ public class EventFragment extends Fragment{
                         event.set_eventName(row.getString("name"));
                         if (row.getString("_id").length() > 0)
                         {
-                            event.set_eventImage("http://10.31.16.228:3000/upload/"+ row.getString("_id"));
+                            event.set_eventImage("http://37.187.245.237/upload/"+ row.getString("_id"));
                         }
                         event.set_eventStartDate(row.getString("begin"));
                         event.set_eventEndDate(row.getString("end"));
@@ -163,6 +172,18 @@ public class EventFragment extends Fragment{
                         event.set_eventLocation(row.getString("address") + ", " + row.get("zipCode"));
                         event.set_eventPrice(row.getString("price"));
                         itemlist.add(i,event);
+//                        ((ProgressBar)act.findViewById(R.id.LoadingEvent)).setVisibility(View.GONE);
+//                        ProgressBar prgb = (ProgressBar)act.findViewById(R.id.LoadingEvent);
+//                        prgb.setVisibility(View.GONE);
+//                        TextView txtv = (TextView)act.findViewById(R.id.noEvents);
+//                        txtv.setVisibility(View.GONE);
+                        act.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                ((ProgressBar)act.findViewById(R.id.LoadingEvent)).setVisibility(View.GONE);
+                                ((TextView)act.findViewById(R.id.noEvents)).setVisibility(View.GONE);
+                            }
+                        });
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -176,6 +197,7 @@ public class EventFragment extends Fragment{
                         TextView noEvents = (TextView) view.findViewById(R.id.noEvents);
                         noEvents.setText(getString(R.string.noEvents));
                         noEvents.setVisibility(View.VISIBLE);
+                        ((ProgressBar)act.findViewById(R.id.LoadingEvent)).setVisibility(View.GONE);
                     }
                 });
                 return itemlist = null;

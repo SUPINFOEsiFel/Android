@@ -13,7 +13,16 @@
         android:textColor="@android:color/white"
         android:layout_marginTop="15dp"
         android:textStyle="italic"
-        android:visibility="gone"/>
+        android:visibility="visible"/>
+    <ProgressBar
+        android:id="@+id/LoadingEvent"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:indeterminate="true"
+        android:layout_below="@id/noEvents"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="5dp"/>
+
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/activity_main_swipe_refresh_layout"
         android:layout_width="match_parent"

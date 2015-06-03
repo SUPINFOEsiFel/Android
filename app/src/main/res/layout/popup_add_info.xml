@@ -13,16 +13,6 @@
         android:layout_marginLeft="16dp"
         android:layout_marginBottom="5dp">
 
-        <EditText
-            android:id="@+id/adresse_edit_info_popup"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:textColor="@android:color/white"
-            android:hint="@string/adresse_event_edit_info"
-            android:textColorHint="@android:color/darker_gray"
-            android:inputType="textPostalAddress"
-            android:theme="@style/Theme.App.Base"
-            android:maxLines="2"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -74,10 +64,28 @@
                 android:background="@null"/>
 
         </LinearLayout>
+        <EditText
+            android:id="@+id/adresse_edit_info_popup"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:textColor="@android:color/white"
+            android:hint="@string/adresse_event_edit_info"
+            android:textColorHint="@android:color/darker_gray"
+            android:inputType="textPostalAddress"
+            android:theme="@style/Theme.App.Base"
+            android:maxLines="2"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="40dp">
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:hint="@string/zipcode_hint"
+                android:textColorHint="@android:color/darker_gray"
+                android:theme="@style/Theme.App.Base"
+                />
             <TextView
                 android:layout_width="0dp"
                 android:layout_weight="1"

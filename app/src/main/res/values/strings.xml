@@ -57,9 +57,11 @@
     <string name="title_activity_splashscreen">SplashscreenActivity</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_even_creator">Créer un événement</string>
+    <string name="creation_event_loader">Création de l\'événement...</string>
+    <string name="send_event_loader">Envoi de l\'événement...</string>
 
-    
-    <string name="create_event_text">Créer</string>
+
+    <string name="create_event_text_button">Créer</string>
 
     <!--Dialog popup edit info et edit desc-->
     <string name="ok_Button">Ok</string>
@@ -71,5 +73,6 @@
     <string name="adresse_event_edit_info">Adresse</string>
     <string name="money_event_edit_info">€</string>
     <string name="prix_event_edit_info">Prix :</string>
+    <string name="zipcode_hint">Code postal</string>
 
 </resources>

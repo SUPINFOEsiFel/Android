@@ -1,25 +1,38 @@
 package com.esilyon.fel;
 
+import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.SystemClock;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Base64;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.esilyon.fel.Popup.popup_AddDesc;
 import com.esilyon.fel.Popup.popup_AddInfo;
+
+import java.io.ByteArrayOutputStream;
 
 
 public class EventCreator extends ActionBarActivity {
@@ -31,13 +44,12 @@ public class EventCreator extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_even_creator);
-
+        View v = getLayoutInflater().inflate(R.layout.activity_even_creator,null);
         this.context = this.getBaseContext();
 
-        Button saveButton = (Button)findViewById(R.id.participeBtn);
-        saveButton.setVisibility(View.INVISIBLE);
-        Button agendaButton = (Button)findViewById(R.id.addTo);
-        agendaButton.setVisibility(View.INVISIBLE);
+        findViewById(R.id.framePart).setVisibility(View.INVISIBLE);
+        findViewById(R.id.frameSchedule).setVisibility(View.INVISIBLE);
+        ((ImageView)findViewById(R.id.imageView)).setImageDrawable(getResources().getDrawable(R.drawable.event_icon));
 
         ImageButton addImageButton = (ImageButton)findViewById(R.id.addImageButton);
         addImageButton.setOnClickListener(new View.OnClickListener() {
@@ -75,6 +87,15 @@ public class EventCreator extends ActionBarActivity {
 
                 FragmentManager fm = getFragmentManager();
                 popup_addDesc.show(fm,"PopupDesc");
+            }
+        });
+
+        final Button createButton = (Button)findViewById(R.id.createEventButton);
+        createButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AsyncTask<Void,Void,Boolean> eventCreatorSend = new SendEvents(EventCreator.this);
+                eventCreatorSend.execute();
             }
         });
 
@@ -123,4 +144,54 @@ public class EventCreator extends ActionBarActivity {
         actionBar.setBackgroundDrawable(new ColorDrawable(this.getResources().getColor(R.color.redFEL)));
         return true;
     }
+
+
+
+    class SendEvents extends AsyncTask<Void,Void,Boolean> {
+
+        public Activity act;
+
+        SendEvents(Activity a) {
+            this.act = a;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            ((RelativeLayout)act.findViewById(R.id.layout_loader_create_event)).setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
+
+            ImageView img = (ImageView)act.findViewById(R.id.imageView);
+            String base64img = "";
+            if(img.getDrawable()!=null) {
+                Bitmap bitmap = ((BitmapDrawable)img.getDrawable()).getBitmap();
+                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+                byte[] byteArray = byteArrayOutputStream.toByteArray();
+                base64img = Base64.encodeToString(byteArray, Base64.DEFAULT);
+                Log.d("base64", base64img);
+            }
+
+            SystemClock.sleep(5000);
+            return true;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean params) {
+            if (params){
+
+                ((RelativeLayout)act.findViewById(R.id.layout_loader_create_event)).setVisibility(View.GONE);
+                act.finish();
+            }
+            else {
+                ((RelativeLayout)act.findViewById(R.id.layout_loader_create_event)).setVisibility(View.VISIBLE);
+                Toast.makeText(act,"Impossible d'envoyer l'événement",Toast.LENGTH_SHORT).show();
+            }
+        }
+
+
+    };
 }
