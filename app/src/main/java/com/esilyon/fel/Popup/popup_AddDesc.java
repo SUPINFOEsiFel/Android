@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,7 +29,8 @@ public class popup_AddDesc extends DialogFragment {
         if (arg != null)
             textDescPopup.setText(arg.getString("desc"));
 
-        View viewTitle = inflater.inflate(R.layout.custom_title_popup_editinfo,null);
+        View viewTitle = inflater.inflate(R.layout.title_popup,null);
+        ((TextView)viewTitle.findViewById(R.id.title_popup)).setText(getString(R.string.title_edit_info));
         builder.setCustomTitle(viewTitle);
 
         Button okButton = (Button)view.findViewById(R.id.ok_button_desc_popup);

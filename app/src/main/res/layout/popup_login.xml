@@ -1,7 +1,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/blueFEL">
+    android:background="@color/blueFEL"
+    android:layout_marginRight="10dp"
+    android:layout_marginLeft="10dp">
 
     <LinearLayout
         android:id="@+id/layout_edit_desc"
@@ -14,16 +16,26 @@
         android:layout_marginBottom="5dp">
 
         <EditText
-            android:id="@+id/text_Desc_Popup"
+            android:id="@+id/edittext_login_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minLines="7"
-            android:inputType="textMultiLine"
+            android:inputType="text|textShortMessage"
             android:gravity="top"
             android:theme="@style/Theme.App.Base"
             android:textColor="@android:color/white"
             android:textColorHint="@color/textColorHint"
-            android:hint="@string/desc_edit_info"/>
+            android:hint="@string/hint_login_id"/>
+
+        <EditText
+            android:id="@+id/edittext_login_pwd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text|textShortMessage"
+            android:gravity="top"
+            android:theme="@style/Theme.App.Base"
+            android:textColor="@android:color/white"
+            android:textColorHint="@color/textColorHint"
+            android:hint="@string/hint_login_pwd"/>
 
     </LinearLayout>
     <LinearLayout
@@ -38,7 +50,7 @@
             android:layout_weight="1"
             android:layout_height="fill_parent">
             <Button
-                android:id="@+id/cancel_button_desc_popup"
+                android:id="@+id/cancel_button_login"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/redFEL"
@@ -46,7 +58,7 @@
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/abc_text_size_title_material_toolbar"
                 android:textAllCaps="false"/>
-            </FrameLayout>
+        </FrameLayout>
 
 
         <View
@@ -60,7 +72,7 @@
             android:layout_weight="1"
             android:layout_height="fill_parent">
             <Button
-                android:id="@+id/ok_button_desc_popup"
+                android:id="@+id/ok_button_login"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/redFEL"
@@ -68,7 +80,7 @@
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/abc_text_size_title_material_toolbar"
                 android:textAllCaps="false"/>
-            </FrameLayout>
+        </FrameLayout>
 
     </LinearLayout>
 

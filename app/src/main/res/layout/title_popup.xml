@@ -6,10 +6,9 @@
     android:background="@color/redFEL">
 
     <TextView
-        android:id="@+id/title_popup_editinfo"
+        android:id="@+id/title_popup"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:text="@string/title_edit_info"
         android:textColor="@android:color/white"
         android:textSize="@dimen/abc_text_size_title_material_toolbar"
         android:gravity="center_vertical" />

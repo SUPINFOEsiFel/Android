@@ -36,6 +36,8 @@ public class HousingFragment extends android.support.v4.app.Fragment {
             }
         });
 
+        setMenuVisibility(false);
+
         Button Housing2Btn = (Button) view.findViewById(R.id.HousingBtn2);
         Housing2Btn.setOnClickListener(new View.OnClickListener() {
             @Override

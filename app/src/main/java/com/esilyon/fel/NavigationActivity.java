@@ -22,16 +22,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
+import com.esilyon.fel.Popup.popup_Login;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 
 public class NavigationActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+
+    public static Menu menuNav;
+    public static Activity act;
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -54,6 +59,8 @@ public class NavigationActivity extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
+        act = this;
     }
 
     @Override
@@ -99,9 +106,6 @@ public class NavigationActivity extends ActionBarActivity
             case 3:
                 mTitle = getString(R.string.title_section3);
                 break;
-            case 4:
-                mTitle = getString(R.string.title_section4);
-                break;
         }
     }
 
@@ -113,7 +117,6 @@ public class NavigationActivity extends ActionBarActivity
         actionBar.setTitle(mTitle);
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         if (!mNavigationDrawerFragment.isDrawerOpen()) {
@@ -122,9 +125,22 @@ public class NavigationActivity extends ActionBarActivity
             // decide what to show in the action bar.
             getMenuInflater().inflate(R.menu.navigation, menu);
             restoreActionBar();
+            menuNav = menu;
+            updateMenuItem();
             return true;
         }
         return super.onCreateOptionsMenu(menu);
+    }
+
+    public static void updateMenuItem(){
+        if(EventFragment.IsConnected){
+            ((MenuItem)menuNav.findItem(R.id.login)).setIcon(act.getResources().getDrawable(R.drawable.ic_logout_white));
+            ((MenuItem)menuNav.findItem(R.id.login)).setTitle(act.getString(R.string.logout));
+        }
+        else {
+            ((MenuItem)menuNav.findItem(R.id.login)).setIcon(act.getResources().getDrawable(R.drawable.ic_login_white));
+            ((MenuItem)menuNav.findItem(R.id.login)).setTitle(act.getString(R.string.login));
+        }
     }
 
     @Override
@@ -134,6 +150,22 @@ public class NavigationActivity extends ActionBarActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+        switch (id){
+            case R.id.login :
+                if (EventFragment.IsConnected) {
+                    EventFragment.IsConnected = false;
+                    EventFragment.token = "";
+                    EventFragment.userID = "";
+                    act.findViewById(R.id.addEventButton).setVisibility(View.GONE);
+                    updateMenuItem();
+                } else {
+                    android.app.FragmentManager fm = getFragmentManager();
+                    popup_Login popup_Login = new popup_Login();
+                    popup_Login.show(fm, "PopupLogin");
+                }
+                break;
+            default:break;
+        }
         return super.onOptionsItemSelected(item);
     }
 

@@ -1,15 +1,12 @@
 package com.esilyon.fel.Popup;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -19,7 +16,6 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-import com.esilyon.fel.EventCreator;
 import com.esilyon.fel.R;
 
 import java.util.Calendar;
@@ -53,7 +49,8 @@ public class popup_AddInfo extends DialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         final View view = inflater.inflate(R.layout.popup_add_info,null);
 
-        View viewTitle = inflater.inflate(R.layout.custom_title_popup_editinfo,null);
+        View viewTitle = inflater.inflate(R.layout.title_popup,null);
+        ((TextView)viewTitle.findViewById(R.id.title_popup)).setText(getString(R.string.title_edit_info));
         builder.setCustomTitle(viewTitle);
 
         dateString = timeString = "";

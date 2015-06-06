@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.esilyon.fel.Entities.Event;
@@ -24,6 +25,11 @@ public class MyParticipationFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.event_layout, container, false);
+
+        v.findViewById(R.id.LoadingEvent).setVisibility(View.GONE);
+        v.findViewById(R.id.addEventButton).setVisibility(View.GONE);
+        setMenuVisibility(false);
+
         eventList = (ListView) v.findViewById(R.id.EventList);
         refreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.activity_main_swipe_refresh_layout);
         refreshLayout.setColorSchemeResources(R.color.redFEL, R.color.blueFEL);

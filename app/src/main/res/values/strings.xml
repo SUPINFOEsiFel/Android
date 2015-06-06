@@ -66,7 +66,6 @@
     <!--Dialog popup edit info et edit desc-->
     <string name="ok_Button">Ok</string>
     <string name="cancel_Button">Annuler</string>
-    <string name="title_edit_info">Editer les informations</string>
     <string name="date_debut_edit_info">Date/Heure de début</string>
     <string name="date_fin_edit_info">Date/Heure de fin</string>
     <string name="desc_edit_info">Description de l\'événement</string>
@@ -74,5 +73,16 @@
     <string name="money_event_edit_info">€</string>
     <string name="prix_event_edit_info">Prix :</string>
     <string name="zipcode_hint">Code postal</string>
+
+    <string name="title_edit_info">Editer les informations</string>
+    <string name="title_login">Assiociatif connect toi !</string>
+
+    <string name="login">Login</string>
+    <string name="logout">Logout</string>
+
+    <string name="hint_login_id">Identifiant</string>
+    <string name="hint_login_pwd">Mot de passe</string>
+
+    <string name="bad_login">Identifiant ou mot de passe incorrect</string>
 
 </resources>
