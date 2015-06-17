@@ -7,6 +7,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -46,7 +47,7 @@ public class popup_AddDesc extends DialogFragment {
                         textDescDetail.setText(textDescPopup.getText());
 
                         EventCreator.eventCreate.set_eventDesc(textDescPopup.getText().toString());
-
+                        hideKeyboard();
                         popup_AddDesc.this.getDialog().dismiss();
             }
         });
@@ -55,12 +56,19 @@ public class popup_AddDesc extends DialogFragment {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                        popup_AddDesc.this.getDialog().cancel();
+                popup_AddDesc.this.getDialog().cancel();
+                hideKeyboard();
             }
         });
 
         builder.setView(view);
         return builder.create();
     }
-
+    private void hideKeyboard() {
+            TextView textDescDetail = (TextView)getActivity().findViewById(R.id.eventDetailDesc);
+            InputMethodManager imm = (InputMethodManager) this.getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
+            InputMethodManager inputManager = (InputMethodManager) this.getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputManager.hideSoftInputFromWindow(textDescDetail.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+    }
 }

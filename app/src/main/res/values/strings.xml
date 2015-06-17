@@ -61,11 +61,11 @@
     <string name="creation_event_loader">Création de l\'événement...</string>
     <string name="send_event_loader">Envoi de l\'événement...</string>
     <string name="send_event_success_loader">Evènement envoyé avec succès...</string>
-    <string name="send_event_failed_loader">Envoi échoué...</string>
+    <string name="send_event_failed_loader">Echec de l\'envoi...</string>
     <string name="login_loader">Connexion en cours...</string>
-    <string name="login_failed_loader">Connexion échoué...</string>
+    <string name="login_failed_loader">Connexion échouée...</string>
     <string name="login_failed_name">Compte inexistant...</string>
-    <string name="login_success">Connexion réussi...</string>
+    <string name="login_success">Connexion réussie...</string>
 
 
     <string name="create_event_text_button">Créer</string>
@@ -83,7 +83,7 @@
     <string name="nameEvent_hint">Nom de l\'évènement</string>
 
     <string name="title_edit_info">Editer les informations</string>
-    <string name="title_login">Assiociatif connect toi !</string>
+    <string name="title_login">Assiociatif connecte toi !</string>
 
     <string name="login">Login</string>
     <string name="logout">Logout</string>
@@ -93,8 +93,11 @@
 
     <string name="bad_login">Identifiant ou mot de passe incorrect</string>
 
-    <string name="toast_long_click_photo">Un long clique sur l\'image remet celle par défaut.</string>
+    <string name="toast_long_click_photo">Un long clique sur l\'image rétablis celle par défaut.</string>
 
     <string name="about_button">À propos</string>
+
+    <string name="lacartedescolocs">La carte des colocs</string>
+    <string name="lacartedescolocs_url">http://www.lacartedescolocs.fr/</string>
 
 </resources>

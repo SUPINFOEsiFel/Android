@@ -2,9 +2,11 @@ package com.esilyon.fel;
 
 import android.app.Activity;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.provider.SyncStateContract;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
@@ -88,6 +90,12 @@ public class NavigationActivity extends ActionBarActivity
                 fragmentTransaction.replace(R.id.container, fragment, "PARTICIPATING").commit();
                 break;
             case 3:
+                if (NavigationDrawerFragment.mDrawerListView != null){
+                    NavigationDrawerFragment.mDrawerListView.setItemChecked(0, true);
+                    fragment = new EventFragment();
+                    fragmentTransaction.replace(R.id.container, fragment, "EVENT").commit();
+                }
+                startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse(getString(R.string.lacartedescolocs_url))));
                 break;
         }
 
@@ -105,6 +113,9 @@ public class NavigationActivity extends ActionBarActivity
                 break;
             case 3:
                 mTitle = getString(R.string.title_section3);
+                break;
+            case 4:
+                mTitle = getString(R.string.title_section1);
                 break;
         }
     }

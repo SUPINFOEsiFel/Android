@@ -20,6 +20,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -115,9 +116,10 @@ public class EventCreator extends ActionBarActivity {
                     arg.putString("desc", textView.getText().toString());
                     popup_addDesc.setArguments(arg);
                 }
-
                 FragmentManager fm = getFragmentManager();
                 popup_addDesc.show(fm,"PopupDesc");
+                InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
             }
         });
 
@@ -127,6 +129,7 @@ public class EventCreator extends ActionBarActivity {
             public void onClick(View v) {
                 AsyncTask<Void,Void,Boolean> eventCreatorSend = new SendEvents(EventCreator.this);
                 eventCreatorSend.execute();
+                TextView textView = (TextView)findViewById(R.id.eventDetailDesc);
             }
         });
 

@@ -24,7 +24,6 @@
             android:textColor="@android:color/white"
             android:textColorHint="@color/textColorHint"
             android:hint="@string/desc_edit_info"/>
-
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
