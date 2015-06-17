@@ -13,6 +13,17 @@
         android:layout_marginLeft="16dp"
         android:layout_marginBottom="5dp">
 
+        <EditText
+            android:id="@+id/name_edit_info_popup"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:textColor="@android:color/white"
+            android:hint="@string/nameEvent_hint"
+            android:textColorHint="@color/textColorHint"
+            android:inputType="textPostalAddress"
+            android:theme="@style/Theme.App.Base"
+            android:maxLines="2"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -79,12 +90,15 @@
             android:layout_width="match_parent"
             android:layout_height="40dp">
             <EditText
+                android:id="@+id/edittext_zipCode"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:hint="@string/zipcode_hint"
                 android:textColorHint="@color/textColorHint"
+                android:inputType="number"
                 android:theme="@style/Theme.App.Base"
+                android:textColor="@android:color/white"
                 />
             <TextView
                 android:layout_width="0dp"
@@ -101,7 +115,7 @@
                 android:textColor="@android:color/white"
                 android:hint="@string/money_event_edit_info"
                 android:textColorHint="@color/textColorHint"
-                android:inputType="number"
+                android:inputType="numberDecimal"
                 android:gravity="right"
                 android:textSize="20dp"
                 android:layout_gravity="right"/>

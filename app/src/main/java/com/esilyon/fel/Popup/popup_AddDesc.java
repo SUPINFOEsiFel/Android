@@ -8,14 +8,16 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
+import com.esilyon.fel.EventCreator;
 import com.esilyon.fel.R;
 
 public class popup_AddDesc extends DialogFragment {
 
     private Context context;
-    private TextView textDescPopup;
+    private EditText textDescPopup;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -24,10 +26,13 @@ public class popup_AddDesc extends DialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         final View view = inflater.inflate(R.layout.popup_add_desc,null);
 
-        textDescPopup = (TextView)view.findViewById(R.id.text_Desc_Popup);
+        textDescPopup = (EditText)view.findViewById(R.id.text_Desc_Popup);
         Bundle arg = getArguments();
-        if (arg != null)
+        if (arg != null) {
             textDescPopup.setText(arg.getString("desc"));
+            textDescPopup.setSelection(textDescPopup.getText().length());
+        }
+        textDescPopup.setFocusable(true);
 
         View viewTitle = inflater.inflate(R.layout.title_popup,null);
         ((TextView)viewTitle.findViewById(R.id.title_popup)).setText(getString(R.string.title_edit_info));
@@ -39,6 +44,9 @@ public class popup_AddDesc extends DialogFragment {
             public void onClick(View v) {
                         TextView textDescDetail = (TextView)getActivity().findViewById(R.id.eventDetailDesc);
                         textDescDetail.setText(textDescPopup.getText());
+
+                        EventCreator.eventCreate.set_eventDesc(textDescPopup.getText().toString());
+
                         popup_AddDesc.this.getDialog().dismiss();
             }
         });

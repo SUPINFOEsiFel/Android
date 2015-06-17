@@ -7,6 +7,7 @@ import android.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +17,9 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import com.esilyon.fel.Entities.Event;
+import com.esilyon.fel.EventCreator;
+import com.esilyon.fel.EventFragment;
 import com.esilyon.fel.R;
 
 import java.util.Calendar;
@@ -32,13 +36,15 @@ public class popup_AddInfo extends DialogFragment {
     private TextView locationDetail;
     private TextView eventDateEnd;
     private TextView price;
+    private TextView NameEvent;
 
     // EditText Popup_AddInfo
     private EditText toDateTimeText;
     private EditText fromDateTimeText;
     private EditText prix;
     private EditText Adresse;
-
+    private EditText ZipCode;
+    private EditText EditNameEvent;
 
     static final int DATE_DIALOG_ID = 0;
 
@@ -60,13 +66,32 @@ public class popup_AddInfo extends DialogFragment {
         fromDateTimeText = (EditText)view.findViewById(R.id.editInfo_datedebut);
         prix = (EditText)view.findViewById(R.id.prix_edit_info_popup);
         Adresse = (EditText)view.findViewById(R.id.adresse_edit_info_popup);
+        ZipCode = (EditText)view.findViewById(R.id.edittext_zipCode);
+        EditNameEvent = (EditText)view.findViewById(R.id.name_edit_info_popup);
+
 
         // Load View TextView DetailActivity
         eventDateStart = (TextView)getActivity().findViewById(R.id.evenDateStart);
         eventDateEnd = (TextView)getActivity().findViewById(R.id.evenDateEnd);
         price = (TextView)getActivity().findViewById(R.id.price);
         locationDetail = (TextView)getActivity().findViewById(R.id.location);
-        eventDateEnd.setVisibility(View.VISIBLE);
+        NameEvent = (TextView)getActivity().findViewById(R.id.layout_nameEvent_creator);
+
+        if (EventCreator.eventCreate.toString().length()>83) {
+            toDateTimeText.setText(EventCreator.eventCreate.get_eventEndDate());
+            fromDateTimeText.setText(EventCreator.eventCreate.get_eventStartDate());
+            prix.setText(EventCreator.eventCreate.get_eventPrice());
+            Adresse.setText(EventCreator.eventCreate.get_eventLocation());
+            ZipCode.setText(EventCreator.eventCreate.get_zipCode());
+            EditNameEvent.setText(EventCreator.eventCreate.get_eventName());
+        }
+
+        if (EventCreator.eventCreate.get_eventName().length()<1){
+            NameEvent.setVisibility(View.GONE);
+        }
+        if (EventCreator.eventCreate.get_eventEndDate().length()<1){
+            eventDateEnd.setVisibility(View.INVISIBLE);
+        }
 
         ImageButton fromDateTimeButton = (ImageButton)view.findViewById(R.id.fromDatTimeButton);
         fromDateTimeButton.setOnClickListener(new View.OnClickListener() {
@@ -145,14 +170,44 @@ public class popup_AddInfo extends DialogFragment {
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                locationDetail.setText(getResources().getString(R.string.location)+" "+Adresse.getText().toString());
-                eventDateStart.setText(getResources().getString(R.string.startDate)+" "+fromDateTimeText.getText().toString());
-                eventDateEnd.setText(getResources().getString(R.string.endDate)+" "+toDateTimeText.getText().toString());
 
-                String prixText = " " + prix.getText().toString();
-                if(prix.getText().charAt(prix.getText().length()-1)!='€')
-                    prixText+="€";
-                price.setText(getResources().getString(R.string.price)+prixText);
+                String adr = Adresse.getText().toString();
+                if (adr.length()>0 && ZipCode.getText().toString().length()>0){adr+=", ";}
+                adr+=ZipCode.getText().toString();
+
+                locationDetail.setText(getResources().getString(R.string.location)+" "+adr);
+                eventDateStart.setText(getResources().getString(R.string.startDate)+" "+fromDateTimeText.getText().toString());
+                if (toDateTimeText.getText().toString().length()>0) {
+                    eventDateEnd.setVisibility(View.VISIBLE);
+                    eventDateEnd.setText(getResources().getString(R.string.endDate) + " " + toDateTimeText.getText().toString());
+                    EventCreator.eventCreate.set_eventEndDate(toDateTimeText.getText().toString());
+                }
+                if (EditNameEvent.getText().toString().length()>0) {
+                    NameEvent.setVisibility(View.VISIBLE);
+                    NameEvent.setText(getResources().getString(R.string.name) + " " + EditNameEvent.getText().toString());
+                    EventCreator.eventCreate.set_eventName(EditNameEvent.getText().toString());
+                }
+
+//                String prixText = " " + prix.getText().toString();
+//                if(prix.getText().length()>0) {
+//                    EventCreator.eventCreate.set_eventPrice(prix.getText().toString());
+//                    prixText+="€";
+//                }
+//                price.setText(getResources().getString(R.string.price) + prixText);
+
+                String prixText = prix.getText().toString();
+                if (onlyContains(prixText,'0')){
+                    price.setText(getString(R.string.price) + " " + getString(R.string.free));
+                }
+                else {
+                    EventCreator.eventCreate.set_eventPrice(prixText);
+                    price.setText(getString(R.string.price) + " " + prixText + "€");
+                }
+
+                EventCreator.eventCreate.set_eventLocation(Adresse.getText().toString());
+                EventCreator.eventCreate.set_zipCode(ZipCode.getText().toString());
+                EventCreator.eventCreate.set_eventStartDate(fromDateTimeText.getText().toString());
+
                 popup_AddInfo.this.getDialog().dismiss();
             }
         });
@@ -161,6 +216,9 @@ public class popup_AddInfo extends DialogFragment {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (EventCreator.eventCreate.get_eventName().length()>0) {
+                    NameEvent.setVisibility(View.VISIBLE);
+                }
                 popup_AddInfo.this.getDialog().cancel();
             }
         });
@@ -172,5 +230,13 @@ public class popup_AddInfo extends DialogFragment {
 
     public void setParent(Context context){
         this.context = context;
+    }
+
+    private boolean onlyContains(String s, Character c){
+        if (s.length()>0) {
+            if (s.charAt(0) == c || s.charAt(0)==',' || s.charAt(0)=='.') {
+                return onlyContains(s.substring(1),c);
+            } else return false;
+        } else return true;
     }
 }

@@ -47,10 +47,11 @@
         android:src="@drawable/ic_plus_add"
         android:background="#00000000"/>
 
+
     <FrameLayout
+        android:id="@+id/layout_create_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/layout_create_button"
         android:minWidth="100dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="16dp"
@@ -66,6 +67,22 @@
             android:text="@string/create_event_text_button"/>
     </FrameLayout>
 
+    <TextView
+        android:id="@+id/layout_nameEvent_creator"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="16dp"
+        android:padding="5dp"
+        android:layout_toLeftOf="@id/layout_create_button"
+        android:background="@drawable/border"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        android:gravity="center_vertical"
+        android:visibility="gone"/>
 
     <RelativeLayout
         android:id="@+id/layout_loader_create_event"
@@ -87,6 +104,7 @@
                 android:indeterminate="true"
                 />
             <TextView
+                android:id="@+id/loaderTextCreate"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -96,4 +114,6 @@
                 android:text="@string/creation_event_loader"/>
         </LinearLayout>
     </RelativeLayout>
+
+
 </RelativeLayout>

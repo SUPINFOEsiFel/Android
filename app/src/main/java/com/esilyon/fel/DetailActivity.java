@@ -72,7 +72,7 @@ public class DetailActivity extends ActionBarActivity {
             eventPrice.setText(getString(R.string.price) + " " + currentEvent.get_eventPrice() + "€");
         }
 
-        eventLocation.setText(getString(R.string.location) + " " + currentEvent.get_eventLocation());
+        eventLocation.setText(getString(R.string.location) + " " + currentEvent.get_eventLocation() + ", " + currentEvent.get_zipCode());
 
         final Button participation = (Button) findViewById(R.id.participeBtn);
         eventDetailDesc.setText(currentEvent.get_eventDesc());

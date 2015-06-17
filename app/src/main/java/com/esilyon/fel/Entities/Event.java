@@ -1,6 +1,8 @@
 package com.esilyon.fel.Entities;
 
 
+import android.os.SystemClock;
+
 import java.io.Serializable;
 
 public class Event implements Serializable {
@@ -12,7 +14,19 @@ public class Event implements Serializable {
     private String _eventDesc;
     private String _eventPrice;
     private String _eventLocation;
+    private String _zipCode;
 
+
+    public Event() {
+        _eventImage="";
+        _eventName="";
+        _eventStartDate="";
+        _eventEndDate="";
+        _eventDesc="";
+        _eventPrice="";
+        _eventLocation="";
+        _zipCode="";
+    }
 
     //GETTERS
     public String get_eventImage(){
@@ -40,6 +54,10 @@ public class Event implements Serializable {
     }
 
     public String get_eventLocation(){ return _eventLocation; }
+
+    public String get_zipCode() {
+        return _zipCode;
+    }
 
     //SETTERS
     public void set_eventImage(String url){
@@ -70,9 +88,13 @@ public class Event implements Serializable {
         _eventLocation = location;
     }
 
+    public void set_zipCode(String _zipCode) {
+        this._zipCode = _zipCode;
+    }
+
     @Override
     public String toString() {
         return "Event [eventImage=" + _eventImage + ", name=" + _eventName + ", description="
-                + _eventDesc + ", price=" + _eventPrice + ", start=" + _eventStartDate + ", end=" + _eventEndDate + ", location=" + _eventLocation +"]";
+                + _eventDesc + ", price=" + _eventPrice + ", start=" + _eventStartDate + ", end=" + _eventEndDate + ", location=" + _eventLocation + ", zipCode=" + _zipCode +"]";
     }
 }

@@ -157,7 +157,8 @@ public class EventFragment extends Fragment{
                         event.set_eventStartDate(row.getString("begin"));
                         event.set_eventEndDate(row.getString("end"));
                         event.set_eventDesc(row.getString("comment"));
-                        event.set_eventLocation(row.getString("address") + ", " + row.get("zipCode"));
+                        event.set_eventLocation(row.getString("address"));
+                        event.set_zipCode(row.getString("zipCode"));
                         event.set_eventPrice(row.getString("price"));
                         itemlist.add(i,event);
                         act.runOnUiThread(new Runnable() {
