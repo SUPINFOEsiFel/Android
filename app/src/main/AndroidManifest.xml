@@ -17,7 +17,7 @@
         </activity>
         <activity
             android:name=".SplashscreenActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,16 +27,23 @@
         <activity
             android:name=".HousingActivity"
             android:label="@string/title_activity_housing"
-            android:parentActivityName=".NavigationActivity">
+            android:parentActivityName=".NavigationActivity" >
         </activity>
-        <activity android:name=".DetailActivity"
-            android:parentActivityName=".NavigationActivity">
+        <activity
+            android:name=".DetailActivity"
+            android:parentActivityName=".NavigationActivity" >
         </activity>
         <activity
             android:name=".EventCreator"
             android:label="@string/title_activity_even_creator"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".NavigationActivity">
+            android:parentActivityName=".NavigationActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".AProposActivity"
+            android:label="@string/title_activity_apropos"
+            android:parentActivityName=".NavigationActivity"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 

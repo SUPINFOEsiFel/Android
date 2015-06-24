@@ -79,7 +79,7 @@
         android:padding="5dp"
         android:layout_toLeftOf="@id/layout_create_button"
         android:background="@drawable/border"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:textColor="@android:color/black"
         android:gravity="center_vertical"
         android:visibility="gone"/>
@@ -111,8 +111,7 @@
                 android:layout_weight="1"
                 android:paddingLeft="5dp"
                 android:textStyle="italic"
-                android:gravity="center_vertical"
-                android:text="@string/creation_event_loader"/>
+                android:gravity="center_vertical"/>
         </LinearLayout>
     </RelativeLayout>
 

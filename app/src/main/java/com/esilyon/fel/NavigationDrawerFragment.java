@@ -1,5 +1,6 @@
 package com.esilyon.fel;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
@@ -21,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -110,6 +112,15 @@ public class NavigationDrawerFragment extends Fragment {
                         getString(R.string.lacartedescolocs)
                 }));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
+
+        Button apropos = (Button)v.findViewById(R.id.apropos_button);
+        apropos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), AProposActivity.class);
+                getActivity().startActivity(intent);
+            }
+        });
         return v;
     }
 

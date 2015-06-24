@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.esilyon.fel.Entities.Event;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -27,12 +28,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Timer;
 
 
 public class DetailActivity extends ActionBarActivity {
 
     private Event currentEvent;
     public boolean alreadyParticipating = false;
+    static private int participNb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +54,8 @@ public class DetailActivity extends ActionBarActivity {
         TextView eventLocation = (TextView) findViewById(R.id.location);
         TextView eventPrice = (TextView) findViewById(R.id.price);
         TextView eventDetailDesc = (TextView) findViewById(R.id.eventDetailDesc);
+
+        participNb=0;
 
         if(currentEvent.get_eventImage() != null){
             ImageLoader.getInstance().displayImage(currentEvent.get_eventImage(),image, options);
@@ -93,12 +98,26 @@ public class DetailActivity extends ActionBarActivity {
                     preferences.removeEvents(getApplicationContext(), currentEvent);
                     alreadyParticipating = false;
                     participation.setText(getString(R.string.addEvent));
+
+                    participNb++;
                 }
                 else
                 {
                     preferences.addEvents(getApplicationContext(), currentEvent);
                     participation.setText(getString(R.string.removeEvent));
                     alreadyParticipating = true;
+
+                    participNb++;
+                }
+
+                switch (participNb){
+                    case 16:
+                        Toast.makeText(DetailActivity.this,R.string.stopit_now,Toast.LENGTH_LONG).show();
+                        break;
+                    case 32:
+                        Toast.makeText(DetailActivity.this,R.string.stopit_now2,Toast.LENGTH_LONG).show();
+                        DetailActivity.this.finish();
+                        break;
                 }
 
             }

@@ -18,6 +18,7 @@
         android:layout_alignBottom="@id/listViewDrawer"
         android:layout_alignParentBottom="true">
         <Button
+            android:id="@+id/apropos_button"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@android:color/transparent"

@@ -127,13 +127,25 @@ public class EventCreator extends ActionBarActivity {
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AsyncTask<Void,Void,Boolean> eventCreatorSend = new SendEvents(EventCreator.this);
-                eventCreatorSend.execute();
-                TextView textView = (TextView)findViewById(R.id.eventDetailDesc);
+                if(minimumValide()){
+                    AsyncTask<Void,Void,Boolean> eventCreatorSend = new SendEvents(EventCreator.this);
+                    eventCreatorSend.execute();
+                    TextView textView = (TextView)findViewById(R.id.eventDetailDesc);
+                }
+                else {
+                    Toast.makeText(context,getString(R.string.missing_data_event),Toast.LENGTH_LONG).show();
+                }
             }
         });
+    }
 
-//        Button
+    private boolean minimumValide() {
+        TextView eventName = (TextView)findViewById(R.id.layout_nameEvent_creator);
+        TextView dateDebut = (TextView)findViewById(R.id.evenDateStart);
+        TextView adresse = (TextView)findViewById(R.id.location);
+
+        if(eventName.getText().length()>0 && dateDebut.getText().length()>0 && adresse.getText().length()>0) return true;
+        else return false;
     }
 
     @Override
@@ -145,10 +157,18 @@ public class EventCreator extends ActionBarActivity {
             String[] filePathColumn = { MediaStore.Images.Media.DATA };
 
             // Get the cursor
-            Cursor cursor = getContentResolver().query(selectedImage,
-                    filePathColumn, null, null, null);
-            // Move to first row
-            cursor.moveToFirst();
+            Cursor cursor;
+            try {
+                cursor = getContentResolver().query(selectedImage,
+                        filePathColumn, null, null, null);
+                // Move to first row
+                cursor.moveToFirst();
+            }
+            catch (NullPointerException n){
+                n.printStackTrace();
+                Toast.makeText(context,getString(R.string.error_image_load),Toast.LENGTH_LONG).show();
+                return;
+            }
 
             String filePath = "";
 
@@ -193,6 +213,7 @@ public class EventCreator extends ActionBarActivity {
         protected void onPreExecute() {
             super.onPreExecute();
             ((RelativeLayout)act.findViewById(R.id.layout_loader_create_event)).setVisibility(View.VISIBLE);
+            ((TextView)act.findViewById(R.id.loaderTextCreate)).setText(getString(R.string.creation_event_loader));
         }
 
         @Override
@@ -241,7 +262,7 @@ public class EventCreator extends ActionBarActivity {
 
             try {
                 connection.setEntity(new UrlEncodedFormEntity(pairs));
-                 response = client.execute(connection);
+                response = client.execute(connection);
                 str = EntityUtils.toString(response.getEntity(), "UTF-8");
 
                 Log.d("log response", response.toString());
@@ -304,7 +325,7 @@ public class EventCreator extends ActionBarActivity {
                 act.finish();
             }
             else {
-                ((RelativeLayout)act.findViewById(R.id.layout_loader_create_event)).setVisibility(View.VISIBLE);
+                ((RelativeLayout)act.findViewById(R.id.layout_loader_create_event)).setVisibility(View.INVISIBLE);
                 Toast.makeText(act,"Impossible d'envoyer l'événement",Toast.LENGTH_SHORT).show();
             }
         }

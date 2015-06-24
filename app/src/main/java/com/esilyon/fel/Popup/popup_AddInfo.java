@@ -16,13 +16,17 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.esilyon.fel.Entities.Event;
 import com.esilyon.fel.EventCreator;
 import com.esilyon.fel.EventFragment;
 import com.esilyon.fel.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class popup_AddInfo extends DialogFragment {
 
@@ -92,6 +96,21 @@ public class popup_AddInfo extends DialogFragment {
         if (EventCreator.eventCreate.get_eventEndDate().length()<1){
             eventDateEnd.setVisibility(View.INVISIBLE);
         }
+
+        toDateTimeText.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                toDateTimeText.setText("");
+                return true;
+            }
+        });
+        fromDateTimeText.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                fromDateTimeText.setText("");
+                return true;
+            }
+        });
 
         ImageButton fromDateTimeButton = (ImageButton)view.findViewById(R.id.fromDatTimeButton);
         fromDateTimeButton.setOnClickListener(new View.OnClickListener() {
@@ -178,22 +197,26 @@ public class popup_AddInfo extends DialogFragment {
                 locationDetail.setText(getResources().getString(R.string.location)+" "+adr);
                 eventDateStart.setText(getResources().getString(R.string.startDate)+" "+fromDateTimeText.getText().toString());
                 if (toDateTimeText.getText().toString().length()>0) {
-                    eventDateEnd.setVisibility(View.VISIBLE);
-                    eventDateEnd.setText(getResources().getString(R.string.endDate) + " " + toDateTimeText.getText().toString());
-                    EventCreator.eventCreate.set_eventEndDate(toDateTimeText.getText().toString());
+                    Date d1 = parsingToDate(fromDateTimeText.getText().toString());
+                    Date d2 = parsingToDate(toDateTimeText.getText().toString());
+
+                    if (d1.after(d2)){
+                        Toast.makeText(context,getString(R.string.error_date_too_short),Toast.LENGTH_LONG).show();
+                        eventDateEnd.setVisibility(View.INVISIBLE);
+                        eventDateEnd.setText("");
+                        EventCreator.eventCreate.set_eventEndDate("");
+                    }
+                    else {
+                        eventDateEnd.setVisibility(View.VISIBLE);
+                        eventDateEnd.setText(getResources().getString(R.string.endDate) + " " + toDateTimeText.getText().toString());
+                        EventCreator.eventCreate.set_eventEndDate(toDateTimeText.getText().toString());
+                    }
                 }
                 if (EditNameEvent.getText().toString().length()>0) {
                     NameEvent.setVisibility(View.VISIBLE);
                     NameEvent.setText(getResources().getString(R.string.name) + " " + EditNameEvent.getText().toString());
                     EventCreator.eventCreate.set_eventName(EditNameEvent.getText().toString());
                 }
-
-//                String prixText = " " + prix.getText().toString();
-//                if(prix.getText().length()>0) {
-//                    EventCreator.eventCreate.set_eventPrice(prix.getText().toString());
-//                    prixText+="€";
-//                }
-//                price.setText(getResources().getString(R.string.price) + prixText);
 
                 String prixText = prix.getText().toString();
                 if (onlyContains(prixText,'0')){
@@ -238,5 +261,20 @@ public class popup_AddInfo extends DialogFragment {
                 return onlyContains(s.substring(1),c);
             } else return false;
         } else return true;
+    }
+
+    private Date parsingToDate(String s)
+    {
+        if(s == null) return null;
+        else {
+            SimpleDateFormat sdf = new SimpleDateFormat(getResources().getString(R.string.date_format));
+            Date d = new Date();
+            try {
+                d = sdf.parse(s);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            return d;
+        }
     }
 }

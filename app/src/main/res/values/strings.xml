@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">FEL</string>
+    <string name="app_name">Fel SmartApp</string>
 
     <!-- DRAWER -->
     <string name="title_section1">Evènement</string>
@@ -54,7 +54,7 @@
     <string name="Loader_Wait">Veuillez patienter...</string>
 
     <!-- FORMAT DATE/HEURE -->
-    <string name="date_format">dd/MM/yyyy</string>
+    <string name="date_format">dd/MM/yyyy hh:mm</string>
     <string name="title_activity_splashscreen">SplashscreenActivity</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_even_creator">Créer un événement</string>
@@ -81,6 +81,9 @@
     <string name="prix_event_edit_info">Prix :</string>
     <string name="zipcode_hint">Code postal</string>
     <string name="nameEvent_hint">Nom de l\'évènement</string>
+    <string name="error_image_load">Impossible de charger le fichier, peut-être inexistant.</string>
+    <string name="error_date_too_short">Veuillez vérifier votre date de fin.</string>
+    <string name="missing_data_event">Vous devez entrer au minimum : \nUn nom d\'événement \nUne date et heure de début \nUn lieu</string>
 
     <string name="title_edit_info">Editer les informations</string>
     <string name="title_login">Assiociatif connecte toi !</string>
@@ -95,9 +98,35 @@
 
     <string name="toast_long_click_photo">Un long clique sur l\'image rétablis celle par défaut.</string>
 
-    <string name="about_button">À propos</string>
 
     <string name="lacartedescolocs">La carte des colocs</string>
     <string name="lacartedescolocs_url">http://www.lacartedescolocs.fr/</string>
+
+    <!--Text à propos-->
+    <string name="about_button">À Propos</string>
+    <string name="title_activity_apropos">À Propos</string>
+    <string name="founder_project">Fondateurs :</string>
+    <string name="ecole_name">École Supinfo Lyon</string>
+    <string name="fel_name">FEL (Fédération des Étudiants Lyonnais)</string>
+    <string name="bde_name">BDE Esi Lyon</string>
+    <string name="labo_name">Labo Web dev</string>
+    <string name="devs_title">Développeurs :</string>
+    <string name="dev_one">Benoit Guillot</string>
+    <string name="dev_two">Iemsal Assous</string>
+    <string name="dev_three">Loic Billaud</string>
+    <string name="contrib">Contributeurs du projet :</string>
+    <string name="github_link">https://github.com/SUPINFOEsiFel</string>
+    <string name="linkedin_dev_one">https://fr.linkedin.com/pub/benoit-guillot/b8/19b/35a</string>
+    <string name="linkedin_dev_two">https://fr.linkedin.com/pub/iemsal-assous/71/775/14b</string>
+    <string name="linkedin_dev_three">https://fr.linkedin.com/pub/loïc-billaud/65/479/a25</string>
+    <string name="link_supinfo">http://www.supinfo.com</string>
+    <string name="link_esilyon">https://www.facebook.com/EsiLyon</string>
+    <string name="link_fel">http://http://www.fel.asso.fr/</string>
+    <string name="copyright">Copyright ©2015, Supinfo &amp; FEL and the Fel SmartApp\'s contributors</string>
+    <!---->
+
+    <!--Text EasterEggs-->
+    <string name="stopit_now">Bon, tu vas te décider ?</string>
+    <string name="stopit_now2">Allé ça suffit j\'arrête tout !</string>
 
 </resources>
