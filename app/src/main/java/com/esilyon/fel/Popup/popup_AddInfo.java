@@ -136,7 +136,7 @@ public class popup_AddInfo extends DialogFragment {
                             @Override
                             public void onTimeSet(TimePicker view, int hourOfDay,int minute) {
                                 // Display Selected time in textbox
-                                timeString = hourOfDay + ":" + minute;
+                                timeString = String.format("%02d",hourOfDay) + ":" + String.format("%02d",minute);
 
                                 fromDateTimeText.setText(dateString +" "+ timeString);
                             }
@@ -172,7 +172,7 @@ public class popup_AddInfo extends DialogFragment {
                             @Override
                             public void onTimeSet(TimePicker view, int hourOfDay,int minute) {
                                 // Display Selected time in textbox
-                                timeString = hourOfDay + ":" + minute;
+                                timeString = String.format("%02d",hourOfDay) + ":" + String.format("%02d",minute);
 
                                 toDateTimeText.setText(dateString +" "+ timeString);
                             }

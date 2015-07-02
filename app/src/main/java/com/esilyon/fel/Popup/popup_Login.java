@@ -112,7 +112,7 @@ public class popup_Login extends DialogFragment {
             JSONObject jObject = new JSONObject();
             HttpClient client = new DefaultHttpClient();
             HttpParams httpParameters = new BasicHttpParams();
-            HttpPost connection = new HttpPost("http://37.187.245.237/api/login");
+            HttpPost connection = new HttpPost(getString(R.string.apiaddress)+"/api/login");
 
             List<NameValuePair> pairs = new ArrayList<>(3);
             pairs.add(new BasicNameValuePair("user", ((EditText)view.findViewById(R.id.edittext_login_id)).getText().toString()));

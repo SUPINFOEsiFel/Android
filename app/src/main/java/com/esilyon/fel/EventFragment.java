@@ -112,7 +112,7 @@ public class EventFragment extends Fragment{
             JSONArray jArray = new JSONArray();
             HttpClient client = new DefaultHttpClient();
             HttpParams httpParameters = new BasicHttpParams();
-            HttpGet connection = new HttpGet("http://37.187.245.237/api/events");
+            HttpGet connection = new HttpGet(getString(R.string.apiaddress)+"/api/events");
             int timeoutConnection = 3000;
             int timeoutSocket = 3000;
             HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
@@ -150,10 +150,6 @@ public class EventFragment extends Fragment{
                         JSONObject row = jArray.getJSONObject(i);
                         Event event = new Event();
                         event.set_eventName(row.getString("name"));
-                        if (row.getString("_id").length() > 0)
-                        {
-                            event.set_eventImage("http://37.187.245.237/upload/"+ row.getString("_id") + row.getString("imageExtension"));
-                        }
                         event.set_eventStartDate(row.getString("begin"));
                         event.set_eventEndDate(row.getString("end"));
                         event.set_eventDesc(row.getString("comment"));
@@ -161,6 +157,11 @@ public class EventFragment extends Fragment{
                         event.set_zipCode(row.getString("zipCode"));
                         event.set_eventPrice(row.getString("price"));
                         itemlist.add(i,event);
+
+                        if (row.getString("_id").length() > 0 && row.getString("imageExtension").length() > 0)
+                        {
+                            itemlist.get(itemlist.size()-1).set_eventImage(getString(R.string.apiaddress)+"/upload/"+ row.getString("_id") + row.getString("imageExtension"));
+                        }
                         act.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {

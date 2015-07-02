@@ -3,6 +3,8 @@
 
     <string name="app_name">Fel SmartApp</string>
 
+    <string name="apiaddress">http://api.fel.asso.fr</string>
+
     <!-- DRAWER -->
     <string name="title_section1">Evènement</string>
     <string name="title_section2">Trouver son logement</string>
@@ -114,7 +116,7 @@
     <string name="dev_one">Benoit Guillot</string>
     <string name="dev_two">Iemsal Assous</string>
     <string name="dev_three">Loic Billaud</string>
-    <string name="contrib">Contributeurs du projet :</string>
+    <string name="contrib">Et tout les contributeurs du projet</string>
     <string name="github_link">https://github.com/SUPINFOEsiFel</string>
     <string name="linkedin_dev_one">https://fr.linkedin.com/pub/benoit-guillot/b8/19b/35a</string>
     <string name="linkedin_dev_two">https://fr.linkedin.com/pub/iemsal-assous/71/775/14b</string>

@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.SystemClock;
@@ -58,6 +59,8 @@ import java.util.List;
 public class EventCreator extends ActionBarActivity {
 
     public static Event eventCreate;
+
+    private Bitmap bmp;
 
     private static int RESULT_LOAD_IMAGE = 1;
     private Context context;
@@ -180,11 +183,12 @@ public class EventCreator extends ActionBarActivity {
             cursor.close();
 
             BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inSampleSize = 3;
+            options.inSampleSize = 2;
+            bmp = BitmapFactory.decodeFile(filePath,options);
 
             ImageView imgView = (ImageView) findViewById(R.id.imageView);
             // Set the Image in ImageView after decoding the String
-            imgView.setImageBitmap(BitmapFactory.decodeFile(filePath,options));
+            imgView.setImageBitmap(bmp);
 
             Toast.makeText(context,getString(R.string.toast_long_click_photo),Toast.LENGTH_LONG).show();
         }
@@ -224,14 +228,13 @@ public class EventCreator extends ActionBarActivity {
             JSONObject jObject = new JSONObject();
             HttpClient client = new DefaultHttpClient();
             HttpParams httpParameters = new BasicHttpParams();
-            HttpPost connection = new HttpPost("http://37.187.245.237/api/event");
+            HttpPost connection = new HttpPost(getString(R.string.apiaddress)+"/api/event");
 
             ImageView img = (ImageView)act.findViewById(R.id.imageView);
             String base64img = "";
             if(img.getDrawable()!=null) {
-                Bitmap bitmap = ((BitmapDrawable)img.getDrawable()).getBitmap();
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+                bmp.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
                 byte[] byteArray = byteArrayOutputStream.toByteArray();
                 base64img = "data:image/png;base64," + Base64.encodeToString(byteArray, Base64.DEFAULT);
                 Log.d("base64", base64img);
