@@ -63,7 +63,7 @@ public class popup_Login extends DialogFragment {
                 textPWD.setBackground(getResources().getDrawable(R.color.background_edittext));
 
                 if ((textID.getText().toString().length() > 0) && (textPWD.getText().toString().length() > 0)) {
-                    AsyncTask<Void, Void, Void> login_connection = new Login(getActivity(), view);
+                    AsyncTask<Void, Void, Void> login_connection = new Login(NavigationActivity.act, view);
                     login_connection.execute();
                 }
                 else {

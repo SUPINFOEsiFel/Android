@@ -39,6 +39,7 @@ public class NavigationActivity extends ActionBarActivity
 
     public static Menu menuNav;
     public static Activity act;
+    public static int positionFragment;
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -68,6 +69,7 @@ public class NavigationActivity extends ActionBarActivity
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
+        positionFragment = position;
         FragmentManager fragmentManager = getSupportFragmentManager();
         Fragment fragment = null;
         android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
@@ -134,11 +136,13 @@ public class NavigationActivity extends ActionBarActivity
             // Only show items in the action bar relevant to this screen
             // if the drawer is not showing. Otherwise, let the drawer
             // decide what to show in the action bar.
-            getMenuInflater().inflate(R.menu.navigation, menu);
-            restoreActionBar();
-            menuNav = menu;
-            updateMenuItem();
-            return true;
+            if (positionFragment == 0){
+                getMenuInflater().inflate(R.menu.navigation, menu);
+                restoreActionBar();
+                menuNav = menu;
+                updateMenuItem();
+                return true;
+            }
         }
         return super.onCreateOptionsMenu(menu);
     }
