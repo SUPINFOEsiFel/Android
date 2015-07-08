@@ -66,5 +66,25 @@
                 android:layout_height="wrap_content"
                 android:text="@string/Studélite_Housing4"/>
         </FrameLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_margin="16dp"
+            android:background="@color/lightgray"/>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:background="@color/redFEL">
+            <Button
+                android:id="@+id/carte_des_coloc_button"
+                android:background="?android:attr/selectableItemBackground"
+                android:layout_width="match_parent"
+                android:textColor="@android:color/white"
+                android:layout_height="wrap_content"
+                android:text="@string/lacartedescolocs"/>
+        </FrameLayout>
     </LinearLayout>
 </FrameLayout>

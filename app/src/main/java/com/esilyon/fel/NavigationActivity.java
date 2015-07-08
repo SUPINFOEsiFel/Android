@@ -84,20 +84,12 @@ public class NavigationActivity extends ActionBarActivity
                 fragmentTransaction.replace(R.id.container, fragment, "EVENT").commit();
                 break;
             case 1:
-                fragment = new HousingFragment();
-                fragmentTransaction.replace(R.id.container, fragment, "HOUSING").commit();
-                break;
-            case 2:
                 fragment = new MyParticipationFragment();
                 fragmentTransaction.replace(R.id.container, fragment, "PARTICIPATING").commit();
                 break;
-            case 3:
-                if (NavigationDrawerFragment.mDrawerListView != null){
-                    NavigationDrawerFragment.mDrawerListView.setItemChecked(0, true);
-                    fragment = new EventFragment();
-                    fragmentTransaction.replace(R.id.container, fragment, "EVENT").commit();
-                }
-                startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse(getString(R.string.lacartedescolocs_url))));
+            case 2:
+                fragment = new HousingFragment();
+                fragmentTransaction.replace(R.id.container, fragment, "HOUSING").commit();
                 break;
         }
 
@@ -111,13 +103,10 @@ public class NavigationActivity extends ActionBarActivity
                 mTitle = getString(R.string.title_section1);
                 break;
             case 2:
-                mTitle = getString(R.string.title_section2);
-                break;
-            case 3:
                 mTitle = getString(R.string.title_section3);
                 break;
-            case 4:
-                mTitle = getString(R.string.title_section1);
+            case 3:
+                mTitle = getString(R.string.title_section2);
                 break;
         }
     }

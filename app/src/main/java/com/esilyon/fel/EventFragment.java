@@ -85,6 +85,7 @@ public class EventFragment extends Fragment{
                 refreshEvent.execute();
             }
         });
+
         refreshLayout.setRefreshing(true);
         eventListRequest.execute();
         return v;

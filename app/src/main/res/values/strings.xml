@@ -40,16 +40,16 @@
     <string name="Housing_Description">Ici vous pouvez trouver les résidences proposées en ce moment par studélite.</string>
     <!-- RESIDENCE 1 -->
     <string name="Studélite_Housing1">Résidence étudiante Saint-Louis</string>
-    <string name="Studélite_Housing1_link">http://www.studelites.com/fr/lyon/residence-etudiante-saint-louis-lyon-7.html</string>
+    <string name="Studélite_Housing1_link">http://m.studelites.com/#!fr/residence/36770/lyon/residence-etudiante-saint-louis-lyon-7.html</string>
     <!-- RESIDENCE 2 -->
     <string name="Studélite_Housing2">Résidence étudiante Bron Lumière</string>
-    <string name="Studélite_Housing2_link">http://www.studelites.com/fr/lyon/residence-etudiante-saint-louis-lyon-7.html</string>
+    <string name="Studélite_Housing2_link">http://m.studelites.com/#!fr/residence/39280/bron-lumiere-bron/detail</string>
     <!-- RESIDENCE 3 -->
     <string name="Studélite_Housing3">Résidence étudiante Dali II</string>
-    <string name="Studélite_Housing3_link">http://www.studelites.com/fr/lyon/residence-etudiante-dali-ii-lyon-3.html</string>
+    <string name="Studélite_Housing3_link">http://m.studelites.com/#!fr/residence/36724/lyon/residence-etudiante-dali-ii-lyon-3.html</string>
     <!-- RESIDENCE 4 -->
     <string name="Studélite_Housing4">Résidence étudiante Dufy4</string>
-    <string name="Studélite_Housing4_link">http://www.studelites.com/fr/lyon/residence-etudiante-dufy-villeurbanne.html</string>
+    <string name="Studélite_Housing4_link">http://m.studelites.com/#!fr/residence/36853/lyon/residence-etudiante-dufy-villeurbanne.html</string>
 
     <string name="title_activity_housing">HousingActivity</string>
 
@@ -88,7 +88,6 @@
     <string name="missing_data_event">Vous devez entrer au minimum : \nUn nom d\'événement \nUne date et heure de début \nUn lieu</string>
 
     <string name="title_edit_info">Editer les informations</string>
-    <string name="title_login">Assiociatif connecte toi !</string>
 
     <string name="login">Login</string>
     <string name="logout">Logout</string>

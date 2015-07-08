@@ -49,7 +49,7 @@ public class popup_Login extends DialogFragment {
         final View view = inflater.inflate(R.layout.popup_login,null);
 
         View viewTitle = inflater.inflate(R.layout.title_popup,null);
-        ((TextView)viewTitle.findViewById(R.id.title_popup)).setText(getString(R.string.title_login));
+        ((TextView)viewTitle.findViewById(R.id.title_popup)).setText(getString(R.string.title_section4));
         builder.setCustomTitle(viewTitle);
 
         Button okButton = (Button)view.findViewById(R.id.ok_button_login);

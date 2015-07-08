@@ -70,6 +70,14 @@ public class HousingFragment extends android.support.v4.app.Fragment {
                 getActivity().startActivity(intent);
             }
         });
+
+        view.findViewById(R.id.carte_des_coloc_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse(getString(R.string.lacartedescolocs_url))));
+            }
+        });
+
         return view;
     }
 }

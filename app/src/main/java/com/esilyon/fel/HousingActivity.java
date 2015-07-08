@@ -44,6 +44,7 @@ public class HousingActivity extends ActionBarActivity {
         webView.getSettings().setLoadWithOverviewMode(true);
         webView.getSettings().setUseWideViewPort(true);
         webView.getSettings().setBuiltInZoomControls(true);
+//        webView.setWebContentsDebuggingEnabled(false);
         webView.setInitialScale(1);
         try{
             webView.loadUrl(link);
